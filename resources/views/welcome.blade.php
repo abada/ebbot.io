@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>EBBot.io - Streamlined Amazon AWS Elastic Beanstalk Notifications</title>
+        <title>Ebbot - Streamlined Amazon AWS Elastic Beanstalk Notifications</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -79,11 +79,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    EBBot<span style="opacity:0.5;">.io</span>
+                    Ebbot
                 </div>
 
                 <div class="links">
-                    A Notification Bot for Elastic Beanstalk.
+                    Streamlined Amazon AWS Elastic Beanstalk Notifications
                 </div>
             </div>
         </div>
