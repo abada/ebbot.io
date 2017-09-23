@@ -12,4 +12,9 @@ class Team extends SparkTeam
         return $this->hasMany('App\EbEnvironment');
     }
     
+    public function ebevents() 
+    {
+        return $this->hasMany('App\Event');
+    }
+    
 }
