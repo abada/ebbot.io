@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Laravel\Spark\Spark;
+use Carbon\Carbon;
 use Laravel\Spark\Providers\AppServiceProvider as ServiceProvider;
 
 class SparkServiceProvider extends ServiceProvider
@@ -62,5 +63,14 @@ class SparkServiceProvider extends ServiceProvider
             ->features([
                 'First', 'Second', 'Third'
             ]);
+            
+        Spark::swap('TeamRepository@create', function ($user, array $data) {
+            return Spark::team()->forceCreate([
+                'owner_id' => $user->id,
+                'name' => $data['name'],
+                'endpoint' => str_random(20),
+                'trial_ends_at' => Carbon::now()->addDays(Spark::teamTrialDays()),
+            ]);
+        });
     }
 }

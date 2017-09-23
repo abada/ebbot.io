@@ -23,8 +23,9 @@ class HomeController extends Controller
      *
      * @return Response
      */
-    public function show()
+    public function show(Request $request)
     {
-        return view('home');
+        $team = $request->user()->currentTeam;
+        return view('home', ['team' => $team]);
     }
 }

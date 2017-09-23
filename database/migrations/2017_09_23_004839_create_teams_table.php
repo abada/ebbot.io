@@ -16,6 +16,7 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->integer('owner_id')->index();
             $table->string('name');
+            $table->string('endpoint', 20)->unique();
             $table->string('slug')->nullable()->unique();
             $table->text('photo_url')->nullable();
             $table->string('stripe_id')->nullable();

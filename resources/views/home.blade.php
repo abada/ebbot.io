@@ -7,10 +7,15 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
-
                     <div class="panel-body">
-                        Your application's dashboard.
+                        <p>
+                            <strong>
+                                SNS Subscription HTTPS Endpoint
+                            </strong>
+                        </p>
+                        <div style="font-family:monospace;">
+                            {{ url('/api/hooks/'.$team->endpoint) }}
+                        </div>
                     </div>
                 </div>
             </div>
