@@ -167,6 +167,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Laravel\Spark\Providers\SparkServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -176,6 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\SparkServiceProvider::class,
 
     ],
 
