@@ -12,4 +12,8 @@ class EbEnvironment extends Model
         return $this->belongsTo('App\Team');
     }
     
+    public function deployments() {
+        return $this->hasMany('App\EbEnvironmentDeployment');
+    }
+    
 }
