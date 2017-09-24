@@ -33,10 +33,12 @@ class ProcessEvent
      */
     public function handle(NewEvent $event)
     {
-        
+        // FETCH BASIC INFORMATION
         $eb_event = $event->eb_event;
         $team = $eb_event->team;
         $eb_environment = $this->teamRepo->persistEnvironmentForTeam($team, $eb_event->getEbApplication(), $eb_event->getEbEnvironment());
-        
+      
+        // ATTEMPT TO PROCESS EVENT
+        // @JonasTODO: Implement This
     }
 }
