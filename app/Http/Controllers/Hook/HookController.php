@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hook;
 
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\Events\NewEvent;
 use App\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,12 +47,14 @@ class HookController extends Controller
         }
         
         // STORE & PROCESS THE EVENT
-        $event = new Event;
-        $event->team_id = $team->id;
-        $event->sns_message_id = $request->json('MessageId');
-        $event->sns_type = $request->header('x-amz-sns-message-type');
-        $event->payload = json_encode($request->json()->all());
-        $event->save();
+        $eb_event = new Event;
+        $eb_event->team_id = $team->id;
+        $eb_event->sns_message_id = $request->json('MessageId');
+        $eb_event->sns_type = $request->header('x-amz-sns-message-type');
+        $eb_event->payload = json_encode($request->json()->all());
+        $eb_event->save();
+        
+        event(new NewEvent($eb_event));
         
         return "OK";
     }
