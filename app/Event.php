@@ -15,6 +15,11 @@ class Event extends Model
         return $this->belongsTo('App\Team');    
     }
     
+    public function isEbNotification() {
+        $subject = (json_decode($this->payload))->Subject;
+        return $this->sns_type == 'Notification' && strpos($subject, 'AWS Elastic Beanstalk Notification') >= 0;
+    }
+    
     public function getEbTimestamp() 
     {
         return $this->getEBMessageValueFromKey('timestamp');

@@ -65,7 +65,8 @@ class EventServiceProvider extends ServiceProvider
         ],
         
         'App\Events\NewEvent' => [
-            'App\Listeners\ProcessEvent'
+            'App\Listeners\ProcessEvent',
+            'App\Listeners\SetTeamEBNotificationReceived'
         ],
     ];
 

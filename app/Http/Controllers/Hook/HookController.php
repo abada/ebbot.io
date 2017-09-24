@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Hook;
 
 use App\Http\Controllers\Controller;
 use App\Event;
-use App\Events\NewEvent;
 use App\Team;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HookController extends Controller
@@ -38,6 +37,12 @@ class HookController extends Controller
             // ACCEPT AND CONFIRM SNS SUBSCRIPTION
             $subscribeUrl = $request->json('SubscribeURL');
             file_get_contents($subscribeUrl);
+            
+            if(is_null($team->sns_subscribed_at)) {
+                // TRACK SNS SUBSCRIPTION
+                $team->sns_subscribed_at = Carbon::now();
+                $team->save();
+            }
         }
         
         // STORE & PROCESS THE EVENT
@@ -47,8 +52,6 @@ class HookController extends Controller
         $event->sns_type = $request->header('x-amz-sns-message-type');
         $event->payload = json_encode($request->json()->all());
         $event->save();
-        
-        event(new NewEvent($event));
         
         return "OK";
     }
