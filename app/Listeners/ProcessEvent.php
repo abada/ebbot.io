@@ -33,49 +33,15 @@ class ProcessEvent
         $eb_event = $event->eb_event;
         $team = $eb_event->team;
         
-        // EXTRACT PAYLOAD
-        $payload = json_decode($eb_event->payload);
-        
-        // PARSE SNS MESSAGE
-        $eb = [
-            'timestamp' => null,
-            'message' => null,
-            'environment' => null,
-            'application' => null,
-            'environment_url' => null,
-            'notificationprocessid' => null,
-        ];
-        $rows = explode("\n", $payload->Message);
-        foreach($rows as $row) 
-        {
-            $components = explode(':', $row, 2);
-            if(count($components) == 2) {
-                
-                $key = trim(strtolower(str_replace(' ', '_', $components[0])));
-                
-                if($key == 'timestamp') 
-                {
-                    $value = new Carbon(trim($components[1]));
-                }
-                else 
-                {
-                    $value = trim($components[1]);    
-                }
-            
-                
-                $eb[$key] = $value;
-            }
-        }
-        
         $eb_environment = $team->ebenvironments()
-            ->where('eb_application', $eb['application'])
-            ->where('eb_environment', $eb['environment'])
+            ->where('eb_application', $eb_event->getEbApplication())
+            ->where('eb_environment', $eb_event->getEbEnvironment())
             ->first();
             
         if(is_null($eb_environment)) {
             $env = new EbEnvironment;
-            $env->eb_application = $eb['application'];
-            $env->eb_environment = $eb['environment'];
+            $env->eb_application = $eb_event->getEbApplication();
+            $env->eb_environment = $eb_event->getEbEnvironment();
             $team->ebenvironments()->save($env);
         }
         
