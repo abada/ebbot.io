@@ -3,10 +3,19 @@
 namespace App\Libraries\SNSParser\Triggers\Deployment;
 
 use App\Event;
+use App\EbEnvironmentDeployment;
 use App\Libraries\SNSParser\Trigger;
+use App\Repositories\TeamRepository;
 
 class DeploymentStart implements Trigger
 {
+    
+    protected $teamRepo;
+    
+    public function __construct() 
+    {
+        $this->teamRepo = new TeamRepository();
+    }
     
     public function shouldFire(Event $eb_event) 
     {
@@ -15,8 +24,17 @@ class DeploymentStart implements Trigger
     
     public function fire(Event $eb_event) 
     {
+        // FETCH CONTEXT
+        $team = $eb_event->team;
+        $env = $this->teamRepo->persistEnvironmentForTeam($team, $eb_event->getEbApplication(), $eb_event->getEbEnvironment());
+        
+        // CREATE AND SAVE DEPLOYMENT
+        $deployment = new EbEnvironmentDeployment;
+        $deployment->created_at = $eb_event->getEbTimestamp();
+        $env->deployments()->save($deployment);
+        
+        // FIRE NEW DEPLOYMENT EVENT
         // @JonasTODO: Implement This
-        var_dump('deployment_start');
     }
     
 }

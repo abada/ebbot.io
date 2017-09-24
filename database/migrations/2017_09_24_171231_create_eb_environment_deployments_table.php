@@ -16,8 +16,6 @@ class CreateEbEnvironmentDeploymentsTable extends Migration
         Schema::create('eb_environment_deployments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('eb_environment_id')->unsigned();
-            $table->integer('instances')->unsigned();
-            $table->boolean('deployment_success')->nullable()->default(null);
             $table->timestamp('deployment_completed_at')->nullable()->default(null);
             $table->timestamp('deployment_healthy_at')->nullable()->default(null);
             $table->timestamps();

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\TeamRepository;
+use App\Repositories\DeploymentRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -19,14 +20,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerDatabaseConnectionRepository();
+        $this->app->bind(TeamRepository::class, TeamRepository::class);
+        $this->app->bind(DeploymentRepository::class, DeploymentRepository::class);
     }   
     
-    /**
-     * registers the database repository for use in the application
-     */
-    protected function registerDatabaseConnectionRepository() 
-    {
-        $this->app->bind(TeamRepository::class, TeamRepository::class);
-    }
 }
