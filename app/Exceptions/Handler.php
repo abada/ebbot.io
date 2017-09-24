@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Log;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -36,6 +37,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        Log::error($exception); //rollbar
         parent::report($exception);
     }
 

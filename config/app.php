@@ -169,6 +169,7 @@ return [
          */
         Laravel\Spark\Providers\SparkServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
 
         /*
          * Application Service Providers...

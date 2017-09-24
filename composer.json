@@ -7,9 +7,10 @@
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
+        "jenssegers/rollbar": "^1.5",
+        "laravel/cashier": "~7.0",
         "laravel/framework": "5.5.*",
         "laravel/spark": "~5.0",
-        "laravel/cashier": "~7.0",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {
