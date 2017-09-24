@@ -2,13 +2,15 @@
 
 namespace App\Listeners;
 
+use App\EbEnvironment;
 use App\Events\NewEvent;
+use App\Libraries\SNSParser\SNSParser;
+use App\Repositories\TeamRepository;
+use Carbon\Carbon;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use Carbon\Carbon;
-use App\EbEnvironment;
-use App\Repositories\TeamRepository;
+
 
 class ProcessEvent
 {
@@ -38,7 +40,8 @@ class ProcessEvent
         $team = $eb_event->team;
         $eb_environment = $this->teamRepo->persistEnvironmentForTeam($team, $eb_event->getEbApplication(), $eb_event->getEbEnvironment());
       
-        // ATTEMPT TO PROCESS EVENT
-        // @JonasTODO: Implement This
+        // PARSE SNS EVENT
+        $snsParser = new SNSParser();
+        $snsParser->parse($eb_event);
     }
 }
