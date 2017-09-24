@@ -1,6 +1,7 @@
 @extends('spark::layouts.app')
 
 @section('content')
+    <br />
     <div class="container">
         <!-- Application Dashboard -->
         @if(is_null($team->sns_subscribed_at) || is_null($team->sns_eb_received_at))
@@ -73,20 +74,56 @@
         </div>
         @endif
         
-        @foreach($environments as $environment) 
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        {{ $environment->eb_application }}
-                    </div>
-                    <div class="panel-body">
-                        {{ $environment->eb_environment }} ({{ $environment->deployments()->count() }} deployments)
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
+        <div class="panel panel-default">
+            <table class="table">
+            @foreach($environments as $eb_app => $ebs) 
+            
+                <tr style="border-top:3px solid #D3E0E9">
+                    <th width="1"><i class="fa fa-3x fa-globe"></i></th>
+                    <th colspan="2">{{ $eb_app }}</th>
+                    <th>Status</th>
+                    <th>Last Deploy</th>
+                    <th style="text-align: right"><i class="fa fa-bullhorn"></i></th>
+                    <th></th>
+                </tr>
+    
+                @foreach($ebs as $eb)
+                <tr>
+                    <td></td>
+                    <td width="1"><i class="fa fa-circle"></i></td>
+                    <td style="font-family:monospace;">
+                        {{ $eb->eb_environment }}
+                    </td>
+                    <td>
+                        <em>Coming Soon</em>
+                    </td>
+                    <td>
+                        @if($eb->last_deployment)
+                            @if(!is_null($eb->last_deployment->deployment_completed_at))
+                                {{ $eb->last_deployment->deployment_completed_at->toDateTimeString() }}<br />
+                                <small>
+                                    {{ $eb->last_deployment->deployment_completed_at->diffForHumans() }}
+                                    (~ {{ $eb->last_deployment->deployment_completed_at->diffForHumans($eb->last_deployment->created_at, true) }})
+                                </small>
+                            @else
+                                <i class="fa fa-refresh fa-spin"></i> Deploying...
+                            @endif
+                        @else
+                            <em>Unknown</em>
+                        @endif
+                    </td>
+                    <td style="text-align:right">
+                        0
+                    </td>
+                    <td width="1">
+                        <a href="/eb-environments/{{ $eb->id }}" class="btn btn-default">
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+            @endforeach
+        </table>
     </div>
-
+    
 @endsection

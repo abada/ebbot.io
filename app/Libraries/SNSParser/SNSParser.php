@@ -22,7 +22,7 @@ class SNSParser {
     
     public function parse(Event $eb_event) 
     {
-        $success = true;
+        $success = 0;
         
         if($eb_event->isEbNotification()) {
             
@@ -41,6 +41,7 @@ class SNSParser {
                     if($instance->shouldFire($eb_event)) 
                     {
                         $instance->fire($eb_event);
+                         $success ++;
                     }
                     
                 }
@@ -52,7 +53,6 @@ class SNSParser {
                         'event_id' => $eb_event->id,
                         'trigger' => $trigger,
                     ]);
-                    $success = false;
                 }
             }
         }

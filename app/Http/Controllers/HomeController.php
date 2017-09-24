@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\EbEnvironmentRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(EbEnvironmentRepository $ebEnvironmentRepo)
     {
         $this->middleware('auth');
-
-        // $this->middleware('subscribed');
+        $this->ebEnvironmentRepo = $ebEnvironmentRepo;  
     }
 
     /**
@@ -26,7 +27,7 @@ class HomeController extends Controller
     public function show(Request $request)
     {
         $team = $request->user()->currentTeam;
-        $environments = $team->ebenvironments()->orderby('eb_application')->orderby('eb_environment')->get();
+        $environments = $this->ebEnvironmentRepo->organize($team->ebenvironments()->orderby('eb_application')->orderby('eb_environment')->get());
         return view('home', ['team' => $team, 'environments' => $environments]);
     }
 }

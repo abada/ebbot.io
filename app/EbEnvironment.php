@@ -16,4 +16,8 @@ class EbEnvironment extends Model
         return $this->hasMany('App\EbEnvironmentDeployment');
     }
     
+    public function last_deployment() 
+    {
+        return $this->hasOne('App\EbEnvironmentDeployment')->latest('id');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\TeamRepository;
 use App\Repositories\DeploymentRepository;
+use App\Repositories\EbEnvironmentRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(TeamRepository::class, TeamRepository::class);
         $this->app->bind(DeploymentRepository::class, DeploymentRepository::class);
+        $this->app->bind(EbEnvironmentRepository::class, EbEnvironmentRepository::class);
     }   
     
 }

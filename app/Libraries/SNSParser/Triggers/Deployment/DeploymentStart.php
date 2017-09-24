@@ -19,7 +19,7 @@ class DeploymentStart implements Trigger
     
     public function shouldFire(Event $eb_event) 
     {
-        return preg_match('/Application update in progress on [0-9]+ instance(s)?. [0-9]+ out of [0-9]+ instances completed/', $eb_event->getEbMessage());
+        return preg_match('/Application update in progress/', $eb_event->getEbMessage());
     }
     
     public function fire(Event $eb_event) 
@@ -27,6 +27,13 @@ class DeploymentStart implements Trigger
         // FETCH CONTEXT
         $team = $eb_event->team;
         $env = $this->teamRepo->persistEnvironmentForTeam($team, $eb_event->getEbApplication(), $eb_event->getEbEnvironment());
+        
+        // CHECK IF DEPLOYMENT IS IN PROGRESS
+        if(!is_null($env->last_deployment)) {
+            if(is_null($env->last_deployment->deployment_completed_at)) {
+                return true;
+            }
+        }
         
         // CREATE AND SAVE DEPLOYMENT
         $deployment = new EbEnvironmentDeployment;
