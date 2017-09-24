@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hook;
 
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\Events\NewEvent;
 use App\Team;
 
 use Illuminate\Http\Request;
@@ -46,6 +47,8 @@ class HookController extends Controller
         $event->sns_type = $request->header('x-amz-sns-message-type');
         $event->payload = json_encode($request->json()->all());
         $event->save();
+        
+        event(new NewEvent($event));
         
         return "OK";
     }

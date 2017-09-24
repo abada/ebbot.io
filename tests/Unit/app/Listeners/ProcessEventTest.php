@@ -73,7 +73,3 @@ class ProcessEventTest extends TestCase
         $this->assertEquals(1, $team->ebenvironments()->count());
     }
 }
-
-
-
-// 
