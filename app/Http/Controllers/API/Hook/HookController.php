@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Hook;
+namespace App\Http\Controllers\API\Hook;
 
 use App\Http\Controllers\Controller;
 use App\Event;

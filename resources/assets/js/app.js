@@ -15,8 +15,11 @@
  */
 
 require('spark-bootstrap');
-
 require('./components/bootstrap');
+
+import BeanbotDashboard from './components/BeanbotDashboard.vue';
+
+Vue.component('beanbot-dashboard', BeanbotDashboard);
 
 var app = new Vue({
     mixins: [require('spark')]

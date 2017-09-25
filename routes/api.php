@@ -17,7 +17,7 @@ Route::group([
     //
 });
 
-Route::group(['namespace' => 'Hook'], function() {
+Route::group(['namespace' => 'API\Hook'], function() {
     Route::get('/hooks', 'HookController@index');
     Route::post('/hooks/{token}', 'HookController@hook');
 });
