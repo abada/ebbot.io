@@ -7373,3 +7373,21 @@ body {
 [v-cloak] {
   display: none;
 }
+.status-ok {
+  color: #6EAF5D;
+}
+.status-info {
+  color: #6EAF5D;
+}
+.status-warning {
+  color: #FFBD4A;
+}
+.status-unknown {
+  color: #EFEFEF;
+}
+.status-degraded {
+  color: #F05050;
+}
+.status-severe {
+  color: #F05050;
+}
