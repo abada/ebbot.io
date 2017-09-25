@@ -3,7 +3,7 @@
 namespace App\Libraries\SNSParser\Triggers\Deployment;
 
 use App\Event;
-use App\Event\EbEnvironmentDeployHealthy;
+use App\Events\EbEnvironmentDeployHealthy;
 use App\Libraries\SNSParser\Trigger;
 use App\Repositories\DeploymentRepository;
 use App\Repositories\TeamRepository;
