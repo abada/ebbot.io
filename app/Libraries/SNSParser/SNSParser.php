@@ -8,6 +8,7 @@ use Log;
 use App\Libraries\SNSParser\Triggers\Deployment\DeploymentStart;
 use App\Libraries\SNSParser\Triggers\Deployment\DeploymentComplete;
 use App\Libraries\SNSParser\Triggers\Deployment\DeploymentHealthy;
+use App\Libraries\SNSParser\Triggers\Status\StatusChange;
 
 class SNSParser {
     
@@ -17,6 +18,9 @@ class SNSParser {
         DeploymentStart::class,
         DeploymentComplete::class,
         DeploymentHealthy::class,
+        
+        // STATUS
+        StatusChange::class,
         
     ];
     

@@ -12,6 +12,16 @@ class EbEnvironment extends Model
         return $this->belongsTo('App\Team');
     }
     
+    public function status() 
+    {
+        return $this->hasOne('App\EbEnvironmentStatus')->latest('id');
+    }
+    
+    public function statuses() 
+    {
+        return $this->hasMany('App\EbEnvironmentStatus');
+    }
+    
     public function deployments() {
         return $this->hasMany('App\EbEnvironmentDeployment');
     }
