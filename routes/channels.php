@@ -14,3 +14,8 @@
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('team.{team_id}', function ($user, $team_id) {
+    $team = \App\Team::find($team_id);
+    return $user->onTeam($team);
+});

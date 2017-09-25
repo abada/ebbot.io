@@ -87,26 +87,59 @@
 
     export default {
         
+        props: ["currentTeam"],
+        
+        methods: {
+            
+            fetchData() {
+                
+                var vm = this;
+                
+                axios.get('/api/dashboard')
+                    .then(function(response) {
+                        vm.applications = response.data;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            },
+          
+            listen() {
+                
+                var vm = this;
+                
+                window.Echo.private('team.'+vm.currentTeam.id)
+                    .listen('EbEnvironmentStatusChanged', event => {
+                        vm.fetchData();
+                    });
+                    
+                window.Echo.private('team.'+vm.currentTeam.id)
+                    .listen('EbEnvironmentDeployStarted', event => {
+                        vm.fetchData();
+                    });
+                    
+                window.Echo.private('team.'+vm.currentTeam.id)
+                    .listen('EbEnvironmentDeployCompleted', event => {
+                        vm.fetchData();
+                    });
+                    
+            }
+            
+        },
+        
         data() {
             return {
                 applications: null,
                 moment: moment,
+                team_id: null,
             }  
         },
         
         mounted() {
             
             var vm = this;
-            
-            console.log('BeanbotDashboard mounted.')
-            
-            axios.get('/api/dashboard')
-                .then(function(response) {
-                    vm.applications = response.data;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                })
+            this.fetchData();
+            this.listen();
         }
     }
 </script>

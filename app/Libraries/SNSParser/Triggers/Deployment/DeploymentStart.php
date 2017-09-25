@@ -3,6 +3,7 @@
 namespace App\Libraries\SNSParser\Triggers\Deployment;
 
 use App\Event;
+use App\Events\EbEnvironmentDeployStarted;
 use App\EbEnvironmentDeployment;
 use App\Libraries\SNSParser\Trigger;
 use App\Repositories\TeamRepository;
@@ -41,7 +42,7 @@ class DeploymentStart implements Trigger
         $env->deployments()->save($deployment);
         
         // FIRE NEW DEPLOYMENT EVENT
-        // @JonasTODO: Implement This
+        event(new EbEnvironmentDeployStarted($deployment));
     }
     
 }

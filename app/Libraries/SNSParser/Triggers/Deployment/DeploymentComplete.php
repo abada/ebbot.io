@@ -3,6 +3,7 @@
 namespace App\Libraries\SNSParser\Triggers\Deployment;
 
 use App\Event;
+use App\Events\EbEnvironmentDeployCompleted;
 use App\Libraries\SNSParser\Trigger;
 use App\Repositories\DeploymentRepository;
 use App\Repositories\TeamRepository;
@@ -39,7 +40,7 @@ class DeploymentComplete implements Trigger
         }
         
         // FIRE DEPLOYMENT COMPLETE EVENT
-        // @JonasTODO: Implement This
+        event(new EbEnvironmentDeployCompleted($deployment));
     }
     
 }

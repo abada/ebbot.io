@@ -3,6 +3,7 @@
 namespace App\Libraries\SNSParser\Triggers\Deployment;
 
 use App\Event;
+use App\Event\EbEnvironmentDeployHealthy;
 use App\Libraries\SNSParser\Trigger;
 use App\Repositories\DeploymentRepository;
 use App\Repositories\TeamRepository;
@@ -39,7 +40,7 @@ class DeploymentHealthy implements Trigger
         }
         
         // FIRE DEPLOYMENT HEALTHY EVENT
-        // @JonasTODO: Implement This
+        event(new EbEnvironmentDeployHealthy($deployment));
     }
     
 }

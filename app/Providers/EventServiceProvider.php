@@ -68,6 +68,11 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\ProcessEvent',
             'App\Listeners\SetTeamEBNotificationReceived'
         ],
+        
+        'App\Events\EbEnvironmentStatusChanged' => [],
+        'App\Events\EbEnvironmentDeployStarted' => [],
+        'App\Events\EbEnvironmentDeployCompleted' => [],
+        'App\Events\EbEnvironmentDeployHealthy' => [],
     ];
 
     /**

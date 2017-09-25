@@ -3,7 +3,7 @@
 @section('content')
     
     <div class="container">
-        <beanbot-dashboard></beanbot-dashboard>
+        <beanbot-dashboard :current-team="currentTeam"></beanbot-dashboard>
     </div>
 
 @endsection
