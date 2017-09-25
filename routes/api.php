@@ -14,7 +14,13 @@
 Route::group([
     'middleware' => 'auth:api'
 ], function () {
-    //
+    
+    Route::group(['namespace' => 'API\Dashboard'], function() {
+        
+        Route::get('/dashboard', 'DashboardController@index');
+        
+    });
+    
 });
 
 Route::group(['namespace' => 'API\Hook'], function() {
