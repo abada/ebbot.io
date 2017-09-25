@@ -14,7 +14,7 @@ class EbEnvironment extends Model
     
     public function status() 
     {
-        return $this->hasOne('App\EbEnvironmentStatus')->latest('id');
+        return $this->hasOne('App\EbEnvironmentStatus')->latest('status_set_at');
     }
     
     public function statuses() 

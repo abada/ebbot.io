@@ -29,9 +29,9 @@ class StatusChange implements Trigger
         $env = $this->teamRepo->persistEnvironmentForTeam($team, $eb_event->getEbApplication(), $eb_event->getEbEnvironment());
         
         // GET ENVIRONMENT STATE FROM MESSAGE
-        preg_match('/transitioned from ([A-z]+) to ([A-z]+).', $eb_event->getEbMessage(), $matches);
-        $from = $matches[0];
-        $to = $matches[1];
+        preg_match('/transitioned from ([A-z]+) to ([A-z]+)./', $eb_event->getEbMessage(), $matches);
+        $from = $matches[1];
+        $to = $matches[2];
         
         // CHECK IF ENVIRONMENT STATE ALREADY CURRENT
         if(!is_null($env->status) && $env->status->status == $to) {
@@ -41,6 +41,7 @@ class StatusChange implements Trigger
         // CREATE NEW ENVIRONMENT STATUS
         $status = new EbEnvironmentStatus;
         $status->status = $to;
+        $status->status_set_at = $eb_event->getEbTimestamp();
         $env->statuses()->save($status);
         
         // FIRE NEW ENVIRONMENT STATUS EVENT

@@ -95,7 +95,11 @@
                         {{ $eb->eb_environment }}
                     </td>
                     <td>
-                        <em>Coming Soon</em>
+                        @if($eb->status)
+                            {{ $eb->status->status }}
+                        @else
+                            <em>Unknown</em>
+                        @endif
                     </td>
                     <td>
                         @if($eb->last_deployment)
