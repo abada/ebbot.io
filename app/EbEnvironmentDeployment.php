@@ -11,7 +11,7 @@ class EbEnvironmentDeployment extends Model
     
     public function eb_environment() 
     {
-        return $this->belongsTo('App\EbEnbironment');
+        return $this->belongsTo('App\EbEnvironment');
     }
     
 }
