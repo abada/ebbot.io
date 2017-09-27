@@ -47,7 +47,15 @@ class DeploymentStart
             'icon' => ':robot_face:',
         ]);
         
-        $slack->send('Deploy Running for '.$environment->eb_environment.'.');
+        $started_str = $deploy->created_at->diffForHumans(null, true);
+        
+        $slack->attach(
+            [
+            	'fallback' => 'Deploy running for '.$environment->eb_environment.'.',
+            	'text' => 'Deploy running for '.$environment->eb_environment.'.',
+            	'color' => 'warning',
+            	'fields' => []
+        	])->send('Deploy running for '.$environment->eb_environment.'.');
         
     }
 }

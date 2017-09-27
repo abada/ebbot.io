@@ -47,6 +47,26 @@ class DeploymentHealthy
             'icon' => ':robot_face:',
         ]);
         
-        $slack->send('Deploy is healthy for '.$environment->eb_environment.'.');
+        $duration_str = $deploy->created_at->diffForHumans($deploy->deployment_completed_at, true);
+        $healthy_str = $deploy->created_at->diffForHumans($deploy->deployment_healthy_at, true);
+        
+        $slack->attach(
+            [
+            	'fallback' => 'Deploy healthy for '.$environment->eb_environment.'.',
+            	'text' => 'Deploy healthy for '.$environment->eb_environment.'.',
+            	'color' => 'good',
+            	'fields' => [
+            		[
+            			'title' => 'Duration',
+            			'value' => $duration_str,
+            			'short' => true
+            		],
+            		[
+            			'title' => 'Healthy After',
+            			'value' => $healthy_str,
+            			'short' => true
+            		],
+            	]
+            ])->send('Deploy healthy for '.$environment->eb_environment.'.');
     }
 }

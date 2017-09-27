@@ -47,6 +47,20 @@ class DeploymentComplete
             'icon' => ':robot_face:',
         ]);
         
-        $slack->send('Deployment finished for '.$environment->eb_environment.'.');
+        $duration_str = $deploy->created_at->diffForHumans($deploy->deployment_completed_at, true);
+        
+        $slack->attach(
+            [
+            	'fallback' => 'Deploy finished for '.$environment->eb_environment.'.',
+            	'text' => 'Deploy finished for '.$environment->eb_environment.'.',
+            	'color' => 'good',
+            	'fields' => [
+            		[
+            			'title' => 'Duration',
+            			'value' => $duration_str,
+            			'short' => true
+            		],
+            	]
+            ])->send('Deploy running for '.$environment->eb_environment.'.');
     }
 }
