@@ -69,10 +69,21 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SetTeamEBNotificationReceived'
         ],
         
-        'App\Events\EbEnvironmentStatusChanged' => [],
-        'App\Events\EbEnvironmentDeployStarted' => [],
-        'App\Events\EbEnvironmentDeployCompleted' => [],
-        'App\Events\EbEnvironmentDeployHealthy' => [],
+        'App\Events\EbEnvironmentStatusChanged' => [
+            'App\Listeners\Notify\Slack\Status\StatusChanged',
+        ],
+        
+        'App\Events\EbEnvironmentDeployStarted' => [
+            'App\Listeners\Notify\Slack\Deployment\DeploymentStart',
+        ],
+        
+        'App\Events\EbEnvironmentDeployCompleted' => [
+            'App\Listeners\Notify\Slack\Deployment\DeploymentComplete',    
+        ],
+        
+        'App\Events\EbEnvironmentDeployHealthy' => [
+            'App\Listeners\Notify\Slack\Deployment\DeploymentHealthy',
+        ],
     ];
 
     /**
