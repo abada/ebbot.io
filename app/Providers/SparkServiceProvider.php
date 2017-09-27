@@ -14,11 +14,11 @@ class SparkServiceProvider extends ServiceProvider
      * @var array
      */
     protected $details = [
-        'vendor' => 'Your Company',
-        'product' => 'Your Product',
-        'street' => 'PO Box 111',
-        'location' => 'Your Town, NY 12345',
-        'phone' => '555-555-5555',
+        'vendor' => 'BeanBot.io',
+        'product' => 'BeanBot',
+        'street' => '800 W 3rd Street, Ste 3302',
+        'location' => 'Austin, TX 78701',
+        'phone' => '(570) 472-4958',
     ];
 
     /**
@@ -26,7 +26,7 @@ class SparkServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $sendSupportEmailsTo = null;
+    protected $sendSupportEmailsTo = 'support@beanbot.io';
 
     /**
      * All of the application developer e-mail addresses.
@@ -34,7 +34,8 @@ class SparkServiceProvider extends ServiceProvider
      * @var array
      */
     protected $developers = [
-        //
+        'weigert.jonas@gmail.com',
+        'jonas@lawnstarter.com',
     ];
 
     /**
@@ -51,7 +52,7 @@ class SparkServiceProvider extends ServiceProvider
      */
     public function booted()
     {
-        Spark::useStripe()->noCardUpFront()->teamTrialDays(10);
+        Spark::useStripe()->noCardUpFront()->teamTrialDays(28);
 
         Spark::freeTeamPlan()
             ->features([
