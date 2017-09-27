@@ -29,7 +29,7 @@
                                 
                                     <div class="media">
                                         <div class="media-left">
-                                            <input type="checkbox" name=""/>
+                                            <input type="checkbox" name="notify_deployment_start" @if($eb_environment->notify_deployment_start) checked="" @endif />
                                         </div>
                                         <div class="media-body">
                                             <strong>On Deploy Start</strong><br />
@@ -39,7 +39,7 @@
                                     
                                     <div class="media">
                                         <div class="media-left">
-                                            <input type="checkbox" name=""/>
+                                            <input type="checkbox" name="notify_deployment_complete" @if($eb_environment->notify_deployment_complete) checked="" @endif />
                                         </div>
                                         <div class="media-body">
                                             <strong>On Deploy Complete</strong><br />
@@ -49,7 +49,7 @@
                                     
                                     <div class="media">
                                         <div class="media-left">
-                                            <input type="checkbox" name=""/>
+                                            <input type="checkbox" name="notify_deployment_healthy" @if($eb_environment->notify_deployment_healthy) checked="" @endif />
                                         </div>
                                         <div class="media-body">
                                             <strong>On Deploy Healthy</strong><br />
@@ -77,7 +77,7 @@
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <input type="checkbox" name=""/>
+                                                    <input type="checkbox" name="notify_status_ok"/>
                                                 </div>
                                                 <div class="media-body status-ok">
                                                     <strong>Ok</strong>
@@ -87,7 +87,7 @@
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <input type="checkbox" name=""/>
+                                                    <input type="checkbox" name="notify_status_info" @if($eb_environment->notify_status_info) checked="" @endif />
                                                 </div>
                                                 <div class="media-body status-info">
                                                     <strong>Info</strong>
@@ -97,7 +97,7 @@
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <input type="checkbox" name=""/>
+                                                    <input type="checkbox" name="notify_status_unknown" @if($eb_environment->notify_status_unknown) checked="" @endif />
                                                 </div>
                                                 <div class="media-body status-unknown">
                                                     <strong>Unknown</strong>
@@ -107,7 +107,7 @@
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <input type="checkbox" name=""/>
+                                                    <input type="checkbox" name="notify_status_warning"  @if($eb_environment->notify_status_warning) checked="" @endif />
                                                 </div>
                                                 <div class="media-body status-warning">
                                                     <strong>Warning</strong>
@@ -117,7 +117,7 @@
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <input type="checkbox" name=""/>
+                                                    <input type="checkbox" name="notify_status_degraded"  @if($eb_environment->notify_status_degraded) checked="" @endif />
                                                 </div>
                                                 <div class="media-body status-degraded">
                                                     <strong>Degraded</strong>
@@ -127,7 +127,7 @@
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <input type="checkbox" name=""/>
+                                                    <input type="checkbox" name="notify_status_severe" @if($eb_environment->notify_status_severe) checked="" @endif />
                                                 </div>
                                                 <div class="media-body status-severe">
                                                     <strong>Severe</strong>
@@ -153,15 +153,23 @@
                     <div class="row">
                         <div class="col-md-7">
                             <div class="form-group">
-                                <label for="slack_hook" class="col-sm-3 control-label">Slack Hook</label>
-                                <div class="col-sm-9">
-                                    <input name="slack_hook" type="text" class="form-control" id="slack_hook" placeholder="https://hooks.slack.com/services/XXX/ZZZ">
+                                <div class="col-sm-9 col-md-offset-3">
+                                    <label for="notification_slack">
+                                        <input type="checkbox" name="notification_slack" id="notification_slack" @if($eb_environment->notification_slack) checked="" @endif />&nbsp;
+                                        Enable Slack Integration
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="slack_to" class="col-sm-3 control-label">Channel / User</label>
+                                <label for="notification_slack_hook" class="col-sm-3 control-label">Slack Hook</label>
                                 <div class="col-sm-9">
-                                    <input name="slack_to" type="text" class="form-control" id="slack_to" placeholder="#devops">
+                                    <input name="notification_slack_hook" type="text" class="form-control" id="notification_slack_hook" placeholder="https://hooks.slack.com/services/XXX/ZZZ" value="{{ $eb_environment->notification_slack_hook }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="notification_slack_hook_channel" class="col-sm-3 control-label">Channel / User</label>
+                                <div class="col-sm-9">
+                                    <input name="notification_slack_hook_channel" type="text" class="form-control" id="notification_slack_hook_channel" placeholder="#devops" value="{{ $eb_environment->notification_slack_channel }}">
                                     <small>Make sure to include the <code>#</code> or <code>@</code>.</small>
                                 </div>
                             </div>
