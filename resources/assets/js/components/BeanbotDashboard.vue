@@ -16,6 +16,7 @@
                         <th><i class="fa fa-globe fa-2x"></i></th>
                         <th colspan=2>{{ application }}</th>
                         <th>Status</th>
+                        <th class="text-center" width="1"><i class="fa fa-bullhorn"></i></th>
                         <th>Deploy</th>
                         <th></th>
                     </tr>
@@ -47,6 +48,11 @@
                                     <small>Never Reported</small>
                                 </em>
                             </span>
+                        </td>
+                        <td>
+                            <a :href="'/eb-environments/'+ environment.id+'/settings'">
+                                {{ environment.notification_count }}
+                            </a>
                         </td>
                         <td>
                             <span v-if="environment.last_deployment !== null">

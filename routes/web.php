@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
        Route::get('/eb-environments', 'EbEnvironmentController@index');
        Route::get('/eb-environments/{id}', 'EbEnvironmentController@show');
        Route::get('/eb-environments/{id}/settings', 'EbEnvironmentController@edit');
+       Route::put('/eb-environments/{id}', 'EbEnvironmentController@update');
         
     });
 

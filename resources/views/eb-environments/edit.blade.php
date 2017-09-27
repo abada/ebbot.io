@@ -14,7 +14,7 @@
                     {{ method_field('PUT') }}
                     
                     <h3>
-                        Notifications
+                        Notifications ({{ $eb_environment->notification_count }})
                     </h3>
                     <hr />
             
@@ -77,7 +77,7 @@
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <input type="checkbox" name="notify_status_ok"/>
+                                                    <input type="checkbox" name="notify_status_ok" @if($eb_environment->notify_status_ok) checked="" @endif/>
                                                 </div>
                                                 <div class="media-body status-ok">
                                                     <strong>Ok</strong>
@@ -169,7 +169,7 @@
                             <div class="form-group">
                                 <label for="notification_slack_hook_channel" class="col-sm-3 control-label">Channel / User</label>
                                 <div class="col-sm-9">
-                                    <input name="notification_slack_hook_channel" type="text" class="form-control" id="notification_slack_hook_channel" placeholder="#devops" value="{{ $eb_environment->notification_slack_channel }}">
+                                    <input name="notification_slack_channel" type="text" class="form-control" id="notification_slack_channel" placeholder="#devops" value="{{ $eb_environment->notification_slack_channel }}">
                                     <small>Make sure to include the <code>#</code> or <code>@</code>.</small>
                                 </div>
                             </div>
@@ -189,12 +189,17 @@
                     <br />
                 
                     <!-- SAVE / RESET BUTTONS -->
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        Save Changes
-                    </button>&nbsp;&nbsp;
-                    <button type="reset" class="btn btn-default btn-lg">
-                        Cancel
-                    </button>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Save Changes
+                        </button>&nbsp;&nbsp;
+                        <button type="reset" class="btn btn-default btn-lg">
+                            Cancel
+                        </button>
+                    </div>
+                    <small>
+                        Last Saved: {{ $eb_environment->updated_at->diffForHumans() }}
+                    </small>
                 
                 </form>   
                 

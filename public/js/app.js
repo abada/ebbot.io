@@ -29444,6 +29444,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 var moment = __webpack_require__(0);
@@ -66560,7 +66566,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "colspan": "2"
       }
-    }, [_vm._v(_vm._s(application))]), _vm._v(" "), _c('th', [_vm._v("Status")]), _vm._v(" "), _c('th', [_vm._v("Deploy")]), _vm._v(" "), _c('th')]), _vm._v(" "), _vm._l((environments), function(environment) {
+    }, [_vm._v(_vm._s(application))]), _vm._v(" "), _c('th', [_vm._v("Status")]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('th', [_vm._v("Deploy")]), _vm._v(" "), _c('th')]), _vm._v(" "), _vm._l((environments), function(environment) {
       return _c('tr', {
         class: {
           'danger': environment.status.status === 'Severe' || environment.status.status === 'Degraded',
@@ -66594,9 +66600,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "font-family": "monospace",
           "text-transform": "uppercase"
         }
-      }, [_vm._v(_vm._s(environment.status.status))]), _c('br'), _vm._v(" "), _c('small', [_vm._v(_vm._s(_vm.moment.utc().to(_vm.moment.utc(environment.status.status_set_at))))])]) : _c('span', [_vm._m(2, true)])]), _vm._v(" "), _c('td', [(environment.last_deployment !== null) ? _c('span', [(environment.last_deployment.deployment_completed_at == null) ? _c('span', [_c('i', {
+      }, [_vm._v(_vm._s(environment.status.status))]), _c('br'), _vm._v(" "), _c('small', [_vm._v(_vm._s(_vm.moment.utc().to(_vm.moment.utc(environment.status.status_set_at))))])]) : _c('span', [_vm._m(3, true)])]), _vm._v(" "), _c('td', [_c('a', {
+        attrs: {
+          "href": '/eb-environments/' + environment.id + '/settings'
+        }
+      }, [_vm._v("\n                            " + _vm._s(environment.notification_count) + "\n                        ")])]), _vm._v(" "), _c('td', [(environment.last_deployment !== null) ? _c('span', [(environment.last_deployment.deployment_completed_at == null) ? _c('span', [_c('i', {
         staticClass: "fa fa-refresh fa-spin"
-      }), _vm._v("\n                                Deploying...\n                            ")]) : _c('span', [_vm._v("\n                                " + _vm._s(_vm.moment.utc(environment.last_deployment.deployment_completed_at).format('ddd, MMM Do YYYY, h:mm A')) + " UTC"), _c('br'), _vm._v(" "), _c('small', [_vm._v("\n                                    " + _vm._s(_vm.moment.utc().to(_vm.moment.utc(environment.last_deployment.created_at))) + ",\n                                    Duration: " + _vm._s(_vm.moment(environment.last_deployment.created_at).to(environment.last_deployment.deployment_completed_at, true)) + "\n                                ")])])]) : _c('span', [_vm._m(3, true)])]), _vm._v(" "), _c('td', {
+      }), _vm._v("\n                                Deploying...\n                            ")]) : _c('span', [_vm._v("\n                                " + _vm._s(_vm.moment.utc(environment.last_deployment.deployment_completed_at).format('ddd, MMM Do YYYY, h:mm A')) + " UTC"), _c('br'), _vm._v(" "), _c('small', [_vm._v("\n                                    " + _vm._s(_vm.moment.utc().to(_vm.moment.utc(environment.last_deployment.created_at))) + ",\n                                    Duration: " + _vm._s(_vm.moment(environment.last_deployment.created_at).to(environment.last_deployment.deployment_completed_at, true)) + "\n                                ")])])]) : _c('span', [_vm._m(4, true)])]), _vm._v(" "), _c('td', {
         attrs: {
           "width": "1"
         }
@@ -66619,6 +66629,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('th', [_c('i', {
     staticClass: "fa fa-globe fa-2x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('th', {
+    staticClass: "text-center",
+    attrs: {
+      "width": "1"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-bullhorn"
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('em', [_vm._v("\n                                Unknown"), _c('br'), _vm._v(" "), _c('small', [_vm._v("Never Reported")])])
