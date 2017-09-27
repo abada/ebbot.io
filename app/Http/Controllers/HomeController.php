@@ -15,7 +15,6 @@ class HomeController extends Controller
      */
     public function __construct(EbEnvironmentRepository $ebEnvironmentRepo)
     {
-        $this->middleware('auth');
         $this->ebEnvironmentRepo = $ebEnvironmentRepo;  
     }
 
@@ -28,7 +27,6 @@ class HomeController extends Controller
     {
         $team = $request->user()->currentTeam;
         $environments = $this->ebEnvironmentRepo->organize($team->ebenvironments()->orderby('eb_application')->orderby('eb_environment')->get());
-        //return view('home', ['team' => $team, 'environments' => $environments]);
         return view('dashboard');
     }
 }

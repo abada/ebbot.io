@@ -7383,11 +7383,33 @@ body {
   color: #FFBD4A;
 }
 .status-unknown {
-  color: #EFEFEF;
+  color: #FFBD4A;
 }
 .status-degraded {
   color: #F05050;
 }
 .status-severe {
   color: #F05050;
+}
+.nav-tabs.nav-tabnav {
+  border-bottom: 0px;
+  margin-right: -2px;
+}
+.nav-tabs.nav-tabnav li.active a {
+  background: #FFF;
+  border: 1px solid #D3E0E9;
+  border-bottom: 1px solid #FFF;
+}
+.panel.panel-default.panel-tabnav {
+  border-radius: 0px;
+}
+.panel.panel-default.panel-tabnav .panel-body {
+  border-radius: 0px;
+  padding: 40px 40px 60px 40px;
+}
+.settings-section {
+  padding-left: 20px;
+}
+.settings-section h4 {
+  margin-bottom: 17px;
 }
