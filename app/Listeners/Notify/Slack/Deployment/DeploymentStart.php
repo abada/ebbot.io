@@ -55,7 +55,7 @@ class DeploymentStart
             	'text' => 'Deploy running for '.$environment->eb_environment.'.',
             	'color' => 'warning',
             	'fields' => []
-        	])->send('Deploy running for '.$environment->eb_environment.'.');
+        	])->send();
         
     }
 }

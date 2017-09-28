@@ -67,6 +67,6 @@ class DeploymentHealthy
             			'short' => true
             		],
             	]
-            ])->send('Deploy healthy for '.$environment->eb_environment.'.');
+            ])->send();
     }
 }

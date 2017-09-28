@@ -5,6 +5,7 @@ namespace App\Listeners\Notify\Slack\Status;
 use App\Events\EbEnvironmentStatusChanged;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maknz\Slack\Client as SlackClient;
 
 class StatusChanged
 {
@@ -75,11 +76,11 @@ class StatusChanged
         
         $slack->attach(
             [
-            	'fallback' => $environment->eb_environment.' status has changed to '.strtoupper($status->status).'.',
-            	'text' => $environment->eb_environment.' status has changed to '.strtoupper($status->status).'.',
+            	'fallback' => strtoupper($status->status).': '.$environment->eb_environment,
+            	'text' => strtoupper($status->status).': '.$environment->eb_environment,
             	'color' => $notifyForCurrentStatus ? $statusColor : 'good',
             	'fields' => [],
-            ])->send($environment->eb_environment.' status has changed to '.$status->status);
+            ])->send();
         
         
     }

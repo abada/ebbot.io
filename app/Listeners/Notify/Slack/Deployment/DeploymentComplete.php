@@ -61,6 +61,6 @@ class DeploymentComplete
             			'short' => true
             		],
             	]
-            ])->send('Deploy running for '.$environment->eb_environment.'.');
+            ])->send();
     }
 }
