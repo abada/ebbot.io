@@ -11,4 +11,8 @@
 
 require('./../spark-components/bootstrap');
 
-require('./BeanbotDashboard');
+import BeanbotDashboard from './BeanbotDashboard.vue';
+import EnvironmentAdd from './EnvironmentAdd.vue';
+
+Vue.component('beanbot-dashboard', BeanbotDashboard);
+Vue.component('environment-add', EnvironmentAdd);

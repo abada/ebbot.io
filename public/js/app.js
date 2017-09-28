@@ -28376,9 +28376,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_BeanbotDashboard_vue__ = __webpack_require__(300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_BeanbotDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_BeanbotDashboard_vue__);
 
 /*
  |--------------------------------------------------------------------------
@@ -28398,9 +28395,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(161);
 __webpack_require__(266);
 __webpack_require__(162);
-
-
-Vue.component('beanbot-dashboard', __WEBPACK_IMPORTED_MODULE_0__components_BeanbotDashboard_vue___default.a);
 
 var app = new Vue({
   mixins: [__webpack_require__(267)]
@@ -29432,7 +29426,6 @@ var moment = __webpack_require__(0);
 
             axios.get('/api/dashboard').then(function (response) {
                 vm.applications = response.data;
-                vm.applications = [];
                 vm.teamHasApplications = !Array.isArray(vm.applications);
             }).catch(function (error) {
                 console.log(error);
@@ -29537,8 +29530,14 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 
 /***/ }),
 /* 162 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue__);
 
 /*
  |--------------------------------------------------------------------------
@@ -29552,7 +29551,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 
 __webpack_require__(165);
 
-__webpack_require__(300);
+
+
+
+Vue.component('beanbot-dashboard', __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue___default.a);
+Vue.component('environment-add', __WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue___default.a);
 
 /***/ }),
 /* 163 */
@@ -66561,9 +66564,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [(_vm.applications === null) ? _c('div', {
+  return _c('div', [(_vm.applications === null) ? _c('div', {
     staticClass: "panel"
   }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && !_vm.teamHasApplications) ? _c('div', {
     staticClass: "alert alert-info"
@@ -77139,6 +77140,346 @@ return Vue$3;
 
 module.exports = __webpack_require__(139);
 
+
+/***/ }),
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ["endpoint"],
+
+    data: function data() {
+        return {
+            arn: '',
+            region: '',
+            eb_appliation: '',
+            eb_environment: ''
+        };
+    },
+    mounted: function mounted() {}
+});
+
+/***/ }),
+/* 405 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(301)(
+  /* script */
+  __webpack_require__(404),
+  /* template */
+  __webpack_require__(406),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/ubuntu/workspace/ebbot.io/resources/assets/js/components/EnvironmentAdd.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] EnvironmentAdd.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7267d4ec", Component.options)
+  } else {
+    hotAPI.reload("data-v-7267d4ec", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 406 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-left"
+  }, [(_vm.arn === '') ? _c('i', {
+    staticClass: "fa fa-circle-o fa-2x"
+  }) : _c('i', {
+    staticClass: "fa fa-check-circle-o fa-2x status-ok"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h3', {
+    staticClass: "media-heading"
+  }, [_vm._v("Create / Find a SNS Topic ARN")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(0), _vm._v(" "), _c('ol', [_c('li', [_vm._m(1), _c('br'), _vm._v("\n                        Create a new topic (or use one you already have for elastic beanstalk apps)."), _c('br'), _c('br'), _vm._v(" "), _c('ol', [_vm._m(2), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Subscribe BeanBot to the new Topic")]), _c('br'), _vm._v("\n                                Select the checkbox next to the new topic and then click "), _c('code', [_vm._v("Actions > Subscribe to topic")]), _vm._v(" "), _c('table', {
+    staticClass: "table"
+  }, [_vm._m(3), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Endpoint")]), _c('td', [_vm._v(_vm._s(_vm.endpoint))])])])])]), _vm._v(" "), _c('br')]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Paste the Topic's ARN here")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.arn),
+      expression: "arn"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.arn)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.arn = $event.target.value
+      }
+    }
+  })])])]) : _c('div', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.arn),
+      expression: "arn"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Your Topic's ARN"
+    },
+    domProps: {
+      "value": (_vm.arn)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.arn = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('br')])])]), _vm._v(" "), _c('div', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-left"
+  }, [(_vm.arn === '') ? _c('i', {
+    staticClass: "fa fa-circle-o fa-2x"
+  }) : _c('i', {
+    staticClass: "fa fa-rocket fa-2x"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h3', {
+    staticClass: "media-heading"
+  }, [_vm._v("Update Elastic Beanstalk Environment to send Notifications")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(4)]) : _c('div', [_vm._m(5)])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', [_c('span', {
+    staticClass: "status-ok"
+  }, [_c('strong', [_vm._v("You only need one ARN for all \n                        environments")]), _vm._v(" but can have a dedicated \n                        ARN per environment. It is up to you and your organization's prefences / needs.\n                    ")]), _c('br'), _vm._v(" "), _c('small', [_vm._v("BeanBot uses webhooks powered by SNS to update you on the state\n                    of your elastic beanstalk environment.\n                    This keeps your stack secure by not prodividing BeanBot with \n                    any sensitive keys.")]), _c('br'), _c('br')])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('strong', [_vm._v("Go to "), _c('a', {
+    attrs: {
+      "href": "https://console.aws.amazon.com/sns/v2/home#/topics",
+      "target": "_blank"
+    }
+  }, [_vm._v("https://console.aws.amazon.com/sns/v2/home#/topics")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('strong', [_vm._v("Create a New Topic")]), _c('br'), _vm._v(" \n                                Click "), _c('code', [_vm._v("Create New Topic")]), _vm._v(", the \n                                names are up to you. We recommend BeanBot.\n                                "), _c('br'), _vm._v(" "), _c('br')])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('tr', [_c('th', [_vm._v("Protocol")]), _c('td', [_vm._v("HTTPS")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', [_c('small', [_vm._v("We can't configure the environments yet! We need the ARN first!")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', [_c('small', [_vm._v("The only way to configure elastic beanstalk notifications is to run a command in the AWS CLI. The following steps will generate the correct command for your applications.")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7267d4ec", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

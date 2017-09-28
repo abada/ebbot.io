@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         
         <div class="panel" v-if="applications === null">
             <div class="panel-body text-center">
@@ -110,7 +110,6 @@
                 axios.get('/api/dashboard')
                     .then(function(response) {
                         vm.applications = response.data;
-                        vm.applications = [];
                         vm.teamHasApplications = !Array.isArray(vm.applications);
                     })
                     .catch(function(error) {

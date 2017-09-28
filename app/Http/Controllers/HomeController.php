@@ -26,7 +26,6 @@ class HomeController extends Controller
     public function show(Request $request)
     {
         $team = $request->user()->currentTeam;
-        $environments = $this->ebEnvironmentRepo->organize($team->ebenvironments()->orderby('eb_application')->orderby('eb_environment')->get());
-        return view('dashboard');
+        return view('dashboard', ['team' => $team]);
     }
 }
