@@ -9,7 +9,7 @@
             </div>
         </div>
         
-        <div class="panel panel-default" v-else="applications === null">
+        <div class="panel panel-default" v-if="applications !== null && applications.lenght > 0">
             <table class="table table-hover table-eb">
                 <tbody v-for="(environments, application) in applications">
                     <tr>
