@@ -9,13 +9,13 @@
             </div>
         </div>
         
-        <div class="alert alert-info" v-if="applications !== null && applications == []">
+        <div class="alert alert-info" v-if="applications !== null && !teamHasApplications">
             <strong>Looks like Beanbot has not received any events from any of your environments.</strong><br />
-            Once you have updated your elastic beanstalk environments to send events via SNS it takes until then next
-            change on that environment (deploy, status chamge, config change...) for it to appear here.
+            Once you have updated your elastic beanstalk environments to send events to your SNS topic you are all set.<br /> 
+            It takes until then next change on that environment (deploy, status chamge, config change...) for it to appear here.
         </div>
         
-        <div class="panel panel-default" v-if="applications !== null && applications.length !== {}">
+        <div class="panel panel-default" v-if="applications !== null && teamHasApplications">
             <table class="table table-hover table-eb">
                 <tbody v-for="(environments, application) in applications">
                     <tr>
@@ -110,6 +110,8 @@
                 axios.get('/api/dashboard')
                     .then(function(response) {
                         vm.applications = response.data;
+                        vm.applications = [];
+                        vm.teamHasApplications = !Array.isArray(vm.applications);
                     })
                     .catch(function(error) {
                         console.log(error);
@@ -144,6 +146,7 @@
                 applications: null,
                 moment: moment,
                 team_id: null,
+                teamHasApplications: false,
             }  
         },
         

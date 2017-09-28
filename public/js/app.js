@@ -28399,12 +28399,12 @@ __webpack_require__(161);
 __webpack_require__(266);
 __webpack_require__(162);
 
+
+Vue.component('beanbot-dashboard', __WEBPACK_IMPORTED_MODULE_0__components_BeanbotDashboard_vue___default.a);
+
 var app = new Vue({
   mixins: [__webpack_require__(267)]
 });
-
-
-Vue.component('beanbot-dashboard', __WEBPACK_IMPORTED_MODULE_0__components_BeanbotDashboard_vue___default.a);
 
 /***/ }),
 /* 140 */,
@@ -29432,6 +29432,8 @@ var moment = __webpack_require__(0);
 
             axios.get('/api/dashboard').then(function (response) {
                 vm.applications = response.data;
+                vm.applications = [];
+                vm.teamHasApplications = !Array.isArray(vm.applications);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -29458,7 +29460,8 @@ var moment = __webpack_require__(0);
         return {
             applications: null,
             moment: moment,
-            team_id: null
+            team_id: null,
+            teamHasApplications: false
         };
     },
     mounted: function mounted() {
@@ -66562,9 +66565,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container"
   }, [(_vm.applications === null) ? _c('div', {
     staticClass: "panel"
-  }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && _vm.applications == []) ? _c('div', {
+  }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && !_vm.teamHasApplications) ? _c('div', {
     staticClass: "alert alert-info"
-  }, [_c('strong', [_vm._v("Looks like Beanbot has not received any events from any of your environments.")]), _c('br'), _vm._v("\n        Once you have updated your elastic beanstalk environments to send events via SNS it takes until then next\n        change on that environment (deploy, status chamge, config change...) for it to appear here.\n    ")]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && _vm.applications.length !== {}) ? _c('div', {
+  }, [_c('strong', [_vm._v("Looks like Beanbot has not received any events from any of your environments.")]), _c('br'), _vm._v("\n        Once you have updated your elastic beanstalk environments to send events to your SNS topic you are all set."), _c('br'), _vm._v(" \n        It takes until then next change on that environment (deploy, status chamge, config change...) for it to appear here.\n    ")]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && _vm.teamHasApplications) ? _c('div', {
     staticClass: "panel panel-default"
   }, [_c('table', {
     staticClass: "table table-hover table-eb"
