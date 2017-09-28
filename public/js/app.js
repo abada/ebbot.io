@@ -77329,16 +77329,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ["endpoint"],
+    props: ["endpoint", "intro"],
 
     data: function data() {
         return {
             arn: '',
-            region: '',
+            region: 'us-east-1',
             eb_appliation: '',
             eb_environment: ''
         };
@@ -77385,7 +77443,23 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
+  return _c('div', [(_vm.intro === true) ? _c('div', [_c('div', {
+    staticClass: "media"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h3', {
+    staticClass: "media-heading"
+  }, [_vm._v("Add addtional Elastic Beanstalk Environments")]), _vm._v(" "), _c('p', [_vm._v("\n                        Its really easy to quickly add all your applications to Beanbot\n                        the following step-by-step wizard makes it a matter of a few mintues.\n                    ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.intro = false
+      }
+    }
+  }, [_vm._v("Let's Get Started")])])])]) : _vm._e(), _vm._v(" "), (_vm.intro !== true) ? _c('div', [_c('div', {
     staticClass: "media"
   }, [_c('div', {
     staticClass: "media-left"
@@ -77397,9 +77471,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "media-body"
   }, [_c('h3', {
     staticClass: "media-heading"
-  }, [_vm._v("Create / Find a SNS Topic ARN")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(0), _vm._v(" "), _c('ol', [_c('li', [_vm._m(1), _c('br'), _vm._v("\n                        Create a new topic (or use one you already have for elastic beanstalk apps)."), _c('br'), _c('br'), _vm._v(" "), _c('ol', [_vm._m(2), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Subscribe BeanBot to the new Topic")]), _c('br'), _vm._v("\n                                Select the checkbox next to the new topic and then click "), _c('code', [_vm._v("Actions > Subscribe to topic")]), _vm._v(" "), _c('table', {
+  }, [_vm._v("Create / Find a SNS Topic ARN")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(1), _vm._v(" "), _c('ol', [_c('li', [_vm._m(2), _c('br'), _vm._v("\n                                Create a new topic (or use one you already have for elastic beanstalk apps)."), _c('br'), _c('br'), _vm._v(" "), _c('ol', [_vm._m(3), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Subscribe BeanBot to the new Topic")]), _c('br'), _vm._v("\n                                        Select the checkbox next to the new topic and then click "), _c('code', [_vm._v("Actions > Subscribe to topic")]), _vm._v(" "), _c('table', {
     staticClass: "table"
-  }, [_vm._m(3), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Endpoint")]), _c('td', [_vm._v(_vm._s(_vm.endpoint))])])])])]), _vm._v(" "), _c('br')]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Paste the Topic's ARN here")]), _vm._v(" "), _c('input', {
+  }, [_vm._m(4), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Endpoint")]), _c('td', [_vm._v(_vm._s(_vm.endpoint))])])])])]), _vm._v(" "), _c('br')]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Paste the Topic's ARN here")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -77452,11 +77526,122 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "media-body"
   }, [_c('h3', {
     staticClass: "media-heading"
-  }, [_vm._v("Update Elastic Beanstalk Environment to send Notifications")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(4)]) : _c('div', [_vm._m(5)])])])])
+  }, [_vm._v("Update Elastic Beanstalk Environment to send Notifications")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(5)]) : _c('div', [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "form-horizontal"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label",
+    attrs: {
+      "for": "region"
+    }
+  }, [_vm._v("EB Region")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.region),
+      expression: "region"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "region",
+      "placeholder": "us-east-1"
+    },
+    domProps: {
+      "value": (_vm.region)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.region = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label",
+    attrs: {
+      "for": "eb_appliation"
+    }
+  }, [_vm._v("Application")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.eb_appliation),
+      expression: "eb_appliation"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "eb_appliation",
+      "placeholder": "application-name-here"
+    },
+    domProps: {
+      "value": (_vm.eb_appliation)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.eb_appliation = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label",
+    attrs: {
+      "for": "eb_environment"
+    }
+  }, [_vm._v("Environment")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.eb_environment),
+      expression: "eb_environment"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "eb_environment",
+      "placeholder": "environment-name-here"
+    },
+    domProps: {
+      "value": (_vm.eb_environment)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.eb_environment = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-8 col-sm-offset-2"
+  }, [_c('br'), _vm._v(" "), _c('strong', [_vm._v("Execute the following command in your terminal:")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "readonly": "",
+      "rows": "5"
+    }
+  }, [_vm._v("aws --region " + _vm._s(_vm.region) + " elasticbeanstalk update-environment \\\n--application-name " + _vm._s(_vm.eb_appliation) + " \\\n--environment-name " + _vm._s(_vm.eb_environment) + " \\\n--option-settings Namespace=aws:elasticbeanstalk:sns:topics,OptionName=\"Notification Topic ARN\",Value=" + _vm._s(_vm.arn))])])])])])])])]) : _vm._e()])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "media-left"
+  }, [_c('i', {
+    staticClass: "fa fa-plus-circle fa-2x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_c('span', {
     staticClass: "status-ok"
-  }, [_c('strong', [_vm._v("You only need one ARN for all \n                        environments")]), _vm._v(" but can have a dedicated \n                        ARN per environment. It is up to you and your organization's prefences / needs.\n                    ")]), _c('br'), _vm._v(" "), _c('small', [_vm._v("BeanBot uses webhooks powered by SNS to update you on the state\n                    of your elastic beanstalk environment.\n                    This keeps your stack secure by not prodividing BeanBot with \n                    any sensitive keys.")]), _c('br'), _c('br')])
+  }, [_c('strong', [_vm._v("You only need one ARN for all \n                                environments")]), _vm._v(" but can have a dedicated \n                                ARN per environment. It is up to you and your organization's prefences / needs.\n                            ")]), _c('br'), _vm._v(" "), _c('small', [_vm._v("BeanBot uses webhooks powered by SNS to update you on the state\n                            of your elastic beanstalk environment.\n                            This keeps your stack secure by not prodividing BeanBot with \n                            any sensitive keys.")]), _c('br'), _c('br')])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('strong', [_vm._v("Go to "), _c('a', {
     attrs: {
@@ -77465,13 +77650,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("https://console.aws.amazon.com/sns/v2/home#/topics")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('strong', [_vm._v("Create a New Topic")]), _c('br'), _vm._v(" \n                                Click "), _c('code', [_vm._v("Create New Topic")]), _vm._v(", the \n                                names are up to you. We recommend BeanBot.\n                                "), _c('br'), _vm._v(" "), _c('br')])
+  return _c('li', [_c('strong', [_vm._v("Create a New Topic")]), _c('br'), _vm._v(" \n                                        Click "), _c('code', [_vm._v("Create New Topic")]), _vm._v(", the \n                                        names are up to you. We recommend BeanBot.\n                                        "), _c('br'), _vm._v(" "), _c('br')])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', [_c('th', [_vm._v("Protocol")]), _c('td', [_vm._v("HTTPS")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_c('small', [_vm._v("We can't configure the environments yet! We need the ARN first!")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_c('small', [_vm._v("The only way to configure elastic beanstalk notifications is to run a command in the AWS CLI. The following steps will generate the correct command for your applications.")])])
+  return _c('p', [_c('small', [_vm._v("The only way to configure elastic beanstalk \n                            notifications is to run a command in the \n                            "), _c('a', {
+    attrs: {
+      "href": "https://aws.amazon.com/cli/",
+      "target": "_blank"
+    }
+  }, [_vm._v("AWS CLI")]), _vm._v(". \n                            The following steps will generate the correct command for your applications.")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
