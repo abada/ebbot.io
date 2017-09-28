@@ -110,6 +110,7 @@
                 axios.get('/api/dashboard')
                     .then(function(response) {
                         vm.applications = response.data;
+                        console.log(vm.applications);
                         vm.teamHasApplications = !Array.isArray(vm.applications);
                     })
                     .catch(function(error) {
