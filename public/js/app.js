@@ -66562,7 +66562,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container"
   }, [(_vm.applications === null) ? _c('div', {
     staticClass: "panel"
-  }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && _vm.applications == {}) ? _c('div', {
+  }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && _vm.applications == []) ? _c('div', {
     staticClass: "alert alert-info"
   }, [_c('strong', [_vm._v("Looks like Beanbot has not received any events from any of your environments.")]), _c('br'), _vm._v("\n        Once you have updated your elastic beanstalk environments to send events via SNS it takes until then next\n        change on that environment (deploy, status chamge, config change...) for it to appear here.\n    ")]) : _vm._e(), _vm._v(" "), (_vm.applications !== null && _vm.applications.length !== {}) ? _c('div', {
     staticClass: "panel panel-default"

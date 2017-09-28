@@ -9,7 +9,7 @@
             </div>
         </div>
         
-        <div class="alert alert-info" v-if="applications !== null && applications == {}">
+        <div class="alert alert-info" v-if="applications !== null && applications == []">
             <strong>Looks like Beanbot has not received any events from any of your environments.</strong><br />
             Once you have updated your elastic beanstalk environments to send events via SNS it takes until then next
             change on that environment (deploy, status chamge, config change...) for it to appear here.
