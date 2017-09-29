@@ -7445,9 +7445,12 @@ body {
   opacity: 0.5;
 }
 .hero .slug {
-  font-size: 20px;
+  font-size: 40px;
+  margin-bottom: 60px;
+  color: #EEE;
 }
 .hero .extra {
+  font-size: 20px;
   padding-left: 0px;
 }
 .hero .extra ul {
