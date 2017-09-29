@@ -67242,8 +67242,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }, [_c('i', {
         staticClass: "fa fa",
         class: {
-          'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.last_deployment_completed_at === null,
-            'fa-circle': environment.last_deployment == null || environment.last_deployment.last_deployment_completed_at !== null
+          'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null,
+            'fa-circle': environment.last_deployment == null || environment.last_deployment.deployment_completed_at !== null
         }
       }), _vm._v("  \n                \n                " + _vm._s(environment.eb_environment) + "\n                \n            ")])])
     }))

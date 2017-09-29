@@ -9,8 +9,8 @@
                     }">
                     
                     <i class="fa fa" v-bind:class="{
-                        'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.last_deployment_completed_at === null,
-                        'fa-circle': environment.last_deployment == null || environment.last_deployment.last_deployment_completed_at !== null}"></i>&nbsp;&nbsp;
+                        'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null,
+                        'fa-circle': environment.last_deployment == null || environment.last_deployment.deployment_completed_at !== null}"></i>&nbsp;&nbsp;
                     
                     {{ environment.eb_environment }}
                     
