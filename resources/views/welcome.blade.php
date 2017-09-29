@@ -13,12 +13,8 @@
             <div class="extra">
                 <ul>
                     <li>
-                        <strong>Deployments:</strong>
-                        <small>Start / Complete / Healthy...</small>
-                    </li>
-                    <li>
-                        <strong>Application Status:</strong>
-                        <small>Warning / Degraded  /  Severe...</small>
+                        <strong>Notifications:</strong>
+                        <small>Deployments / Status Changes / Scaling...</small>
                     </li>
                     <li>
                         <strong>Insights:</strong>
