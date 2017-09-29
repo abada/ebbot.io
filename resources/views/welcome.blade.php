@@ -7,7 +7,7 @@
         <div class="container text-left">
             <div class="brand">BeanBot<span class="suffix">.io</span></div>
             <div class="slug">
-                Effective Notifications for Elastic Beanstalk Apps
+                Streamlined Monitoring for Elastic Beanstalk Apps
              </div>
                 
             <div class="extra">
@@ -22,7 +22,7 @@
                     </li>
                     <li>
                         <strong>Insights:</strong>
-                        <small>Deploy Runtime / Deploy Rate / Status Change Logs / Rolling Deploys...</small>
+                        <small>Live Deploys / Deploy Runtime / Deploy Rate / Status Change Logs...</small>
                     </li>
                 </ul>
                 
