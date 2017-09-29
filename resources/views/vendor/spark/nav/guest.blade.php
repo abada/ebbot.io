@@ -23,8 +23,51 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login" class="navbar-link">Login</a></li>
-                <li><a href="/register" class="navbar-link">Register</a></li>
+                <li class="dropdown">
+                    <!-- User Photo / Name -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        Login
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu" style="width:400px;">
+                        <li style="padding:40px 40px 20px 40px;">
+                            <form class="form form-horizontal" role="form" method="POST" action="/login">
+                                {{ csrf_field() }}
+        
+                                <!-- E-Mail Address -->
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="email" placeholder="E-Mail" class="form-control" name="email" value="{{ old('email') }}" autofocus>
+                                    </div>
+                                </div>
+        
+                                <!-- Password -->
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="password" placeholder="Password" class="form-control" name="password">
+                                    </div>
+                                </div>
+    
+                                <!-- Login Button -->
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa m-r-xs fa-sign-in"></i>Login
+                                        </button>
+        
+                                        <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- User Photo / Name -->
+                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="btn btn-primary">Get Started</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

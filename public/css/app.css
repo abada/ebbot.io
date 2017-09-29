@@ -7373,6 +7373,10 @@ body {
 [v-cloak] {
   display: none;
 }
+html,
+body {
+  height: 100%;
+}
 .status-ok {
   color: #6EAF5D;
 }
@@ -7412,4 +7416,59 @@ body {
 }
 .settings-section h4 {
   margin-bottom: 17px;
+}
+.hero {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #FFF;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2989d8+50,207cca+99,7db9e8+100 */
+  background: #1e5799;
+  /* Old browsers */
+  /* FF3.6-15 */
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 99%, #7db9e8 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e5799', endColorstr='#7db9e8', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+}
+.hero .brand {
+  font-size: 120px;
+  line-height: 1.0;
+  margin-left: -10px;
+}
+.hero .brand .suffix {
+  opacity: 0.5;
+}
+.hero .slug {
+  font-size: 20px;
+}
+.hero .extra {
+  padding-left: 40px;
+}
+.hero .extra ul {
+  margin-bottom: 60px;
+  list-style: none;
+  padding: 0px;
+}
+.hero .extra ul li {
+  margin-bottom: 14px;
+}
+.hero .extra .btn {
+  padding: 14px 24px 14px 24px;
+  margin-right: 14px;
+}
+.hero .extra .btn.btn-default {
+  border: 2px solid #FFF;
+  color: #FFF;
+  background: none;
+}
+.hero .extra .btn.btn-default:hover {
+  border: 2px solid #FFF;
+  color: #1e5799;
+  background: #FFF;
 }

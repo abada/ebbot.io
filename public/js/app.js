@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 308);
+/******/ 	return __webpack_require__(__webpack_require__.s = 311);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1899,7 +1899,7 @@ function loadLocale(name) {
             module && module.exports) {
         try {
             oldLocale = globalLocale._abbr;
-            __webpack_require__(288)("./" + name);
+            __webpack_require__(290)("./" + name);
             // because defineLocale currently also sets the global locale, we
             // want to undo that for lazy loaded locales
             getSetGlobalLocale(oldLocale);
@@ -5414,7 +5414,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(157);
+var normalizeHeaderName = __webpack_require__(158);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 var DEFAULT_CONTENT_TYPE = {
@@ -5505,7 +5505,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(289)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(291)))
 
 /***/ }),
 /* 7 */
@@ -6025,7 +6025,7 @@ rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(143);
+module.exports = __webpack_require__(144);
 
 /***/ }),
 /* 13 */
@@ -6035,12 +6035,12 @@ module.exports = __webpack_require__(143);
 
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(149);
-var buildURL = __webpack_require__(152);
-var parseHeaders = __webpack_require__(158);
-var isURLSameOrigin = __webpack_require__(156);
+var settle = __webpack_require__(150);
+var buildURL = __webpack_require__(153);
+var parseHeaders = __webpack_require__(159);
+var isURLSameOrigin = __webpack_require__(157);
 var createError = __webpack_require__(16);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(151);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(152);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -6136,7 +6136,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(154);
+      var cookies = __webpack_require__(155);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -6256,7 +6256,7 @@ module.exports = function isCancel(value) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(148);
+var enhanceError = __webpack_require__(149);
 
 /**
  * Create an Error with the specified message, config, error code, and response.
@@ -28373,9 +28373,65 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 /* 139 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
 
 /*
  |--------------------------------------------------------------------------
@@ -28392,18 +28448,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  |
  */
 
-__webpack_require__(161);
-__webpack_require__(266);
-__webpack_require__(162);
+__webpack_require__(163);
+__webpack_require__(268);
+__webpack_require__(164);
 
 var app = new Vue({
-  mixins: [__webpack_require__(267)]
+  mixins: [__webpack_require__(269)]
 });
 
 /***/ }),
-/* 140 */,
 /* 141 */,
-/* 142 */
+/* 142 */,
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28476,7 +28532,7 @@ RawTask.prototype.call = function () {
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28484,7 +28540,7 @@ RawTask.prototype.call = function () {
 
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(17);
-var Axios = __webpack_require__(145);
+var Axios = __webpack_require__(146);
 var defaults = __webpack_require__(6);
 
 /**
@@ -28519,14 +28575,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(14);
-axios.CancelToken = __webpack_require__(144);
+axios.CancelToken = __webpack_require__(145);
 axios.isCancel = __webpack_require__(15);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(159);
+axios.spread = __webpack_require__(160);
 
 module.exports = axios;
 
@@ -28535,7 +28591,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28599,7 +28655,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28607,10 +28663,10 @@ module.exports = CancelToken;
 
 var defaults = __webpack_require__(6);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(146);
-var dispatchRequest = __webpack_require__(147);
-var isAbsoluteURL = __webpack_require__(155);
-var combineURLs = __webpack_require__(153);
+var InterceptorManager = __webpack_require__(147);
+var dispatchRequest = __webpack_require__(148);
+var isAbsoluteURL = __webpack_require__(156);
+var combineURLs = __webpack_require__(154);
 
 /**
  * Create a new instance of Axios
@@ -28691,7 +28747,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28750,14 +28806,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(150);
+var transformData = __webpack_require__(151);
 var isCancel = __webpack_require__(15);
 var defaults = __webpack_require__(6);
 
@@ -28836,7 +28892,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28862,7 +28918,7 @@ module.exports = function enhanceError(error, config, code, response) {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28894,7 +28950,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28921,7 +28977,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28964,7 +29020,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29039,7 +29095,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29058,7 +29114,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29118,7 +29174,7 @@ module.exports = (
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29139,7 +29195,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29214,7 +29270,7 @@ module.exports = (
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29233,7 +29289,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29277,7 +29333,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29311,7 +29367,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29426,6 +29482,7 @@ var moment = __webpack_require__(0);
 
             axios.get('/api/dashboard').then(function (response) {
                 vm.applications = response.data;
+                console.log(vm.applications);
                 vm.teamHasApplications = !Array.isArray(vm.applications);
             }).catch(function (error) {
                 console.log(error);
@@ -29466,15 +29523,183 @@ var moment = __webpack_require__(0);
 });
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo__ = __webpack_require__(286);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ["endpoint", "intro"],
+
+    data: function data() {
+        return {
+            arn: '',
+            region: 'us-east-1',
+            eb_appliation: '',
+            eb_environment: ''
+        };
+    },
+    mounted: function mounted() {}
+});
+
+/***/ }),
+/* 163 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo__ = __webpack_require__(288);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_echo__);
 
-window._ = __webpack_require__(287);
+window._ = __webpack_require__(289);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -29485,7 +29710,7 @@ window._ = __webpack_require__(287);
 try {
   window.$ = window.jQuery = __webpack_require__(20);
 
-  __webpack_require__(269);
+  __webpack_require__(271);
 } catch (e) {}
 
 /**
@@ -29520,7 +29745,7 @@ if (token) {
 
 
 
-window.Pusher = __webpack_require__(297);
+window.Pusher = __webpack_require__(299);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
@@ -29529,14 +29754,14 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 });
 
 /***/ }),
-/* 162 */
+/* 164 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue__ = __webpack_require__(302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue__ = __webpack_require__(303);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue__);
 
 /*
@@ -29549,7 +29774,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  | your components that you write while building your applications.
  */
 
-__webpack_require__(165);
+__webpack_require__(167);
 
 
 
@@ -29558,129 +29783,22 @@ Vue.component('beanbot-dashboard', __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard
 Vue.component('environment-add', __WEBPACK_IMPORTED_MODULE_1__EnvironmentAdd_vue___default.a);
 
 /***/ }),
-/* 163 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var base = __webpack_require__(212);
+var base = __webpack_require__(214);
 
 Vue.component('spark-register-braintree', {
     mixins: [base]
 });
 
 /***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var base = __webpack_require__(213);
-
-Vue.component('spark-register-stripe', {
-    mixins: [base]
-});
-
-/***/ }),
-/* 165 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/**
- * Layout Components...
- */
-__webpack_require__(172);
-__webpack_require__(173);
-
-/**
- * Authentication Components...
- */
-__webpack_require__(164);
-__webpack_require__(163);
-
-/**
- * Settings Component...
- */
-__webpack_require__(193);
-
-/**
- * Profile Settings Components...
- */
-__webpack_require__(186);
-__webpack_require__(188);
-__webpack_require__(187);
-
-/**
- * Teams Settings Components...
- */
-__webpack_require__(200);
-__webpack_require__(201);
-__webpack_require__(204);
-__webpack_require__(202);
-__webpack_require__(209);
-__webpack_require__(208);
-__webpack_require__(211);
-__webpack_require__(210);
-__webpack_require__(207);
-__webpack_require__(205);
-__webpack_require__(203);
-__webpack_require__(206);
-
-/**
- * Security Settings Components...
- */
-__webpack_require__(189);
-__webpack_require__(192);
-__webpack_require__(191);
-__webpack_require__(190);
-
-/**
- * API Settings Components...
- */
-__webpack_require__(174);
-__webpack_require__(175);
-__webpack_require__(176);
-
-/**
- * Subscription Settings Components...
- */
-__webpack_require__(194);
-__webpack_require__(198);
-__webpack_require__(197);
-__webpack_require__(199);
-__webpack_require__(196);
-__webpack_require__(195);
-
-/**
- * Payment Method Components...
- */
-__webpack_require__(181);
-__webpack_require__(180);
-__webpack_require__(185);
-__webpack_require__(184);
-__webpack_require__(183);
-__webpack_require__(182);
-
-/**
- * Billing History Components...
- */
-__webpack_require__(177);
-__webpack_require__(179);
-__webpack_require__(178);
-
-/**
- * Kiosk Components...
- */
-__webpack_require__(168);
-__webpack_require__(167);
-__webpack_require__(169);
-__webpack_require__(171);
-__webpack_require__(170);
-__webpack_require__(166);
-
-/***/ }),
 /* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var base = __webpack_require__(219);
+var base = __webpack_require__(215);
 
-Vue.component('spark-kiosk-add-discount', {
+Vue.component('spark-register-stripe', {
     mixins: [base]
 });
 
@@ -29688,11 +29806,98 @@ Vue.component('spark-kiosk-add-discount', {
 /* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var base = __webpack_require__(220);
 
-Vue.component('spark-kiosk-announcements', {
-    mixins: [base]
-});
+/**
+ * Layout Components...
+ */
+__webpack_require__(174);
+__webpack_require__(175);
+
+/**
+ * Authentication Components...
+ */
+__webpack_require__(166);
+__webpack_require__(165);
+
+/**
+ * Settings Component...
+ */
+__webpack_require__(195);
+
+/**
+ * Profile Settings Components...
+ */
+__webpack_require__(188);
+__webpack_require__(190);
+__webpack_require__(189);
+
+/**
+ * Teams Settings Components...
+ */
+__webpack_require__(202);
+__webpack_require__(203);
+__webpack_require__(206);
+__webpack_require__(204);
+__webpack_require__(211);
+__webpack_require__(210);
+__webpack_require__(213);
+__webpack_require__(212);
+__webpack_require__(209);
+__webpack_require__(207);
+__webpack_require__(205);
+__webpack_require__(208);
+
+/**
+ * Security Settings Components...
+ */
+__webpack_require__(191);
+__webpack_require__(194);
+__webpack_require__(193);
+__webpack_require__(192);
+
+/**
+ * API Settings Components...
+ */
+__webpack_require__(176);
+__webpack_require__(177);
+__webpack_require__(178);
+
+/**
+ * Subscription Settings Components...
+ */
+__webpack_require__(196);
+__webpack_require__(200);
+__webpack_require__(199);
+__webpack_require__(201);
+__webpack_require__(198);
+__webpack_require__(197);
+
+/**
+ * Payment Method Components...
+ */
+__webpack_require__(183);
+__webpack_require__(182);
+__webpack_require__(187);
+__webpack_require__(186);
+__webpack_require__(185);
+__webpack_require__(184);
+
+/**
+ * Billing History Components...
+ */
+__webpack_require__(179);
+__webpack_require__(181);
+__webpack_require__(180);
+
+/**
+ * Kiosk Components...
+ */
+__webpack_require__(170);
+__webpack_require__(169);
+__webpack_require__(171);
+__webpack_require__(173);
+__webpack_require__(172);
+__webpack_require__(168);
 
 /***/ }),
 /* 168 */
@@ -29700,7 +29905,7 @@ Vue.component('spark-kiosk-announcements', {
 
 var base = __webpack_require__(221);
 
-Vue.component('spark-kiosk', {
+Vue.component('spark-kiosk-add-discount', {
     mixins: [base]
 });
 
@@ -29710,7 +29915,7 @@ Vue.component('spark-kiosk', {
 
 var base = __webpack_require__(222);
 
-Vue.component('spark-kiosk-metrics', {
+Vue.component('spark-kiosk-announcements', {
     mixins: [base]
 });
 
@@ -29720,7 +29925,7 @@ Vue.component('spark-kiosk-metrics', {
 
 var base = __webpack_require__(223);
 
-Vue.component('spark-kiosk-profile', {
+Vue.component('spark-kiosk', {
     mixins: [base]
 });
 
@@ -29730,7 +29935,7 @@ Vue.component('spark-kiosk-profile', {
 
 var base = __webpack_require__(224);
 
-Vue.component('spark-kiosk-users', {
+Vue.component('spark-kiosk-metrics', {
     mixins: [base]
 });
 
@@ -29738,9 +29943,9 @@ Vue.component('spark-kiosk-users', {
 /* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var base = __webpack_require__(226);
+var base = __webpack_require__(225);
 
-Vue.component('spark-navbar', {
+Vue.component('spark-kiosk-profile', {
     mixins: [base]
 });
 
@@ -29748,9 +29953,9 @@ Vue.component('spark-navbar', {
 /* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var base = __webpack_require__(227);
+var base = __webpack_require__(226);
 
-Vue.component('spark-notifications', {
+Vue.component('spark-kiosk-users', {
     mixins: [base]
 });
 
@@ -29760,7 +29965,7 @@ Vue.component('spark-notifications', {
 
 var base = __webpack_require__(228);
 
-Vue.component('spark-api', {
+Vue.component('spark-navbar', {
     mixins: [base]
 });
 
@@ -29770,7 +29975,7 @@ Vue.component('spark-api', {
 
 var base = __webpack_require__(229);
 
-Vue.component('spark-create-token', {
+Vue.component('spark-notifications', {
     mixins: [base]
 });
 
@@ -29780,7 +29985,7 @@ Vue.component('spark-create-token', {
 
 var base = __webpack_require__(230);
 
-Vue.component('spark-tokens', {
+Vue.component('spark-api', {
     mixins: [base]
 });
 
@@ -29790,7 +29995,7 @@ Vue.component('spark-tokens', {
 
 var base = __webpack_require__(231);
 
-Vue.component('spark-invoices', {
+Vue.component('spark-create-token', {
     mixins: [base]
 });
 
@@ -29800,7 +30005,7 @@ Vue.component('spark-invoices', {
 
 var base = __webpack_require__(232);
 
-Vue.component('spark-invoice-list', {
+Vue.component('spark-tokens', {
     mixins: [base]
 });
 
@@ -29810,7 +30015,7 @@ Vue.component('spark-invoice-list', {
 
 var base = __webpack_require__(233);
 
-Vue.component('spark-update-extra-billing-information', {
+Vue.component('spark-invoices', {
     mixins: [base]
 });
 
@@ -29820,7 +30025,7 @@ Vue.component('spark-update-extra-billing-information', {
 
 var base = __webpack_require__(234);
 
-Vue.component('spark-payment-method-braintree', {
+Vue.component('spark-invoice-list', {
     mixins: [base]
 });
 
@@ -29830,7 +30035,7 @@ Vue.component('spark-payment-method-braintree', {
 
 var base = __webpack_require__(235);
 
-Vue.component('spark-payment-method-stripe', {
+Vue.component('spark-update-extra-billing-information', {
     mixins: [base]
 });
 
@@ -29840,7 +30045,7 @@ Vue.component('spark-payment-method-stripe', {
 
 var base = __webpack_require__(236);
 
-Vue.component('spark-redeem-coupon', {
+Vue.component('spark-payment-method-braintree', {
     mixins: [base]
 });
 
@@ -29850,7 +30055,7 @@ Vue.component('spark-redeem-coupon', {
 
 var base = __webpack_require__(237);
 
-Vue.component('spark-update-payment-method-braintree', {
+Vue.component('spark-payment-method-stripe', {
     mixins: [base]
 });
 
@@ -29860,7 +30065,7 @@ Vue.component('spark-update-payment-method-braintree', {
 
 var base = __webpack_require__(238);
 
-Vue.component('spark-update-payment-method-stripe', {
+Vue.component('spark-redeem-coupon', {
     mixins: [base]
 });
 
@@ -29870,7 +30075,7 @@ Vue.component('spark-update-payment-method-stripe', {
 
 var base = __webpack_require__(239);
 
-Vue.component('spark-update-vat-id', {
+Vue.component('spark-update-payment-method-braintree', {
     mixins: [base]
 });
 
@@ -29880,7 +30085,7 @@ Vue.component('spark-update-vat-id', {
 
 var base = __webpack_require__(240);
 
-Vue.component('spark-profile', {
+Vue.component('spark-update-payment-method-stripe', {
     mixins: [base]
 });
 
@@ -29890,7 +30095,7 @@ Vue.component('spark-profile', {
 
 var base = __webpack_require__(241);
 
-Vue.component('spark-update-contact-information', {
+Vue.component('spark-update-vat-id', {
     mixins: [base]
 });
 
@@ -29900,7 +30105,7 @@ Vue.component('spark-update-contact-information', {
 
 var base = __webpack_require__(242);
 
-Vue.component('spark-update-profile-photo', {
+Vue.component('spark-profile', {
     mixins: [base]
 });
 
@@ -29910,7 +30115,7 @@ Vue.component('spark-update-profile-photo', {
 
 var base = __webpack_require__(243);
 
-Vue.component('spark-security', {
+Vue.component('spark-update-contact-information', {
     mixins: [base]
 });
 
@@ -29920,7 +30125,7 @@ Vue.component('spark-security', {
 
 var base = __webpack_require__(244);
 
-Vue.component('spark-disable-two-factor-auth', {
+Vue.component('spark-update-profile-photo', {
     mixins: [base]
 });
 
@@ -29930,7 +30135,7 @@ Vue.component('spark-disable-two-factor-auth', {
 
 var base = __webpack_require__(245);
 
-Vue.component('spark-enable-two-factor-auth', {
+Vue.component('spark-security', {
     mixins: [base]
 });
 
@@ -29940,7 +30145,7 @@ Vue.component('spark-enable-two-factor-auth', {
 
 var base = __webpack_require__(246);
 
-Vue.component('spark-update-password', {
+Vue.component('spark-disable-two-factor-auth', {
     mixins: [base]
 });
 
@@ -29950,7 +30155,7 @@ Vue.component('spark-update-password', {
 
 var base = __webpack_require__(247);
 
-Vue.component('spark-settings', {
+Vue.component('spark-enable-two-factor-auth', {
     mixins: [base]
 });
 
@@ -29960,7 +30165,7 @@ Vue.component('spark-settings', {
 
 var base = __webpack_require__(248);
 
-Vue.component('spark-subscription', {
+Vue.component('spark-update-password', {
     mixins: [base]
 });
 
@@ -29970,7 +30175,7 @@ Vue.component('spark-subscription', {
 
 var base = __webpack_require__(249);
 
-Vue.component('spark-cancel-subscription', {
+Vue.component('spark-settings', {
     mixins: [base]
 });
 
@@ -29980,7 +30185,7 @@ Vue.component('spark-cancel-subscription', {
 
 var base = __webpack_require__(250);
 
-Vue.component('spark-resume-subscription', {
+Vue.component('spark-subscription', {
     mixins: [base]
 });
 
@@ -29990,7 +30195,7 @@ Vue.component('spark-resume-subscription', {
 
 var base = __webpack_require__(251);
 
-Vue.component('spark-subscribe-braintree', {
+Vue.component('spark-cancel-subscription', {
     mixins: [base]
 });
 
@@ -30000,7 +30205,7 @@ Vue.component('spark-subscribe-braintree', {
 
 var base = __webpack_require__(252);
 
-Vue.component('spark-subscribe-stripe', {
+Vue.component('spark-resume-subscription', {
     mixins: [base]
 });
 
@@ -30010,7 +30215,7 @@ Vue.component('spark-subscribe-stripe', {
 
 var base = __webpack_require__(253);
 
-Vue.component('spark-update-subscription', {
+Vue.component('spark-subscribe-braintree', {
     mixins: [base]
 });
 
@@ -30020,7 +30225,7 @@ Vue.component('spark-update-subscription', {
 
 var base = __webpack_require__(254);
 
-Vue.component('spark-teams', {
+Vue.component('spark-subscribe-stripe', {
     mixins: [base]
 });
 
@@ -30030,7 +30235,7 @@ Vue.component('spark-teams', {
 
 var base = __webpack_require__(255);
 
-Vue.component('spark-create-team', {
+Vue.component('spark-update-subscription', {
     mixins: [base]
 });
 
@@ -30040,7 +30245,7 @@ Vue.component('spark-create-team', {
 
 var base = __webpack_require__(256);
 
-Vue.component('spark-current-teams', {
+Vue.component('spark-teams', {
     mixins: [base]
 });
 
@@ -30050,7 +30255,7 @@ Vue.component('spark-current-teams', {
 
 var base = __webpack_require__(257);
 
-Vue.component('spark-mailed-invitations', {
+Vue.component('spark-create-team', {
     mixins: [base]
 });
 
@@ -30060,7 +30265,7 @@ Vue.component('spark-mailed-invitations', {
 
 var base = __webpack_require__(258);
 
-Vue.component('spark-pending-invitations', {
+Vue.component('spark-current-teams', {
     mixins: [base]
 });
 
@@ -30070,7 +30275,7 @@ Vue.component('spark-pending-invitations', {
 
 var base = __webpack_require__(259);
 
-Vue.component('spark-send-invitation', {
+Vue.component('spark-mailed-invitations', {
     mixins: [base]
 });
 
@@ -30080,7 +30285,7 @@ Vue.component('spark-send-invitation', {
 
 var base = __webpack_require__(260);
 
-Vue.component('spark-team-members', {
+Vue.component('spark-pending-invitations', {
     mixins: [base]
 });
 
@@ -30090,7 +30295,7 @@ Vue.component('spark-team-members', {
 
 var base = __webpack_require__(261);
 
-Vue.component('spark-team-membership', {
+Vue.component('spark-send-invitation', {
     mixins: [base]
 });
 
@@ -30100,7 +30305,7 @@ Vue.component('spark-team-membership', {
 
 var base = __webpack_require__(262);
 
-Vue.component('spark-team-profile', {
+Vue.component('spark-team-members', {
     mixins: [base]
 });
 
@@ -30110,7 +30315,7 @@ Vue.component('spark-team-profile', {
 
 var base = __webpack_require__(263);
 
-Vue.component('spark-team-settings', {
+Vue.component('spark-team-membership', {
     mixins: [base]
 });
 
@@ -30120,7 +30325,7 @@ Vue.component('spark-team-settings', {
 
 var base = __webpack_require__(264);
 
-Vue.component('spark-update-team-name', {
+Vue.component('spark-team-profile', {
     mixins: [base]
 });
 
@@ -30130,12 +30335,32 @@ Vue.component('spark-update-team-name', {
 
 var base = __webpack_require__(265);
 
-Vue.component('spark-update-team-photo', {
+Vue.component('spark-team-settings', {
     mixins: [base]
 });
 
 /***/ }),
 /* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var base = __webpack_require__(266);
+
+Vue.component('spark-update-team-name', {
+    mixins: [base]
+});
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var base = __webpack_require__(267);
+
+Vue.component('spark-update-team-photo', {
+    mixins: [base]
+});
+
+/***/ }),
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -30267,7 +30492,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 213 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -30505,7 +30730,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 214 */
+/* 216 */
 /***/ (function(module, exports) {
 
 /**
@@ -30570,7 +30795,7 @@ Vue.filter('currency', function (value) {
 });
 
 /***/ }),
-/* 215 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -30585,20 +30810,20 @@ Spark.forms = {
 /**
  * Load the SparkForm helper class.
  */
-__webpack_require__(217);
+__webpack_require__(219);
 
 /**
  * Define the SparkFormError collection class.
  */
-__webpack_require__(216);
+__webpack_require__(218);
 
 /**
  * Add additional HTTP / form helpers to the Spark object.
  */
-$.extend(Spark, __webpack_require__(218));
+$.extend(Spark, __webpack_require__(220));
 
 /***/ }),
-/* 216 */
+/* 218 */
 /***/ (function(module, exports) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -30670,7 +30895,7 @@ window.SparkFormErrors = function () {
 };
 
 /***/ }),
-/* 217 */
+/* 219 */
 /***/ (function(module, exports) {
 
 /**
@@ -30725,7 +30950,7 @@ window.SparkForm = function (data) {
 };
 
 /***/ }),
-/* 218 */
+/* 220 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -30784,7 +31009,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 219 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function kioskAddDiscountForm() {
@@ -30852,7 +31077,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 220 */
+/* 222 */
 /***/ (function(module, exports) {
 
 var announcementsCreateForm = function announcementsCreateForm() {
@@ -30977,7 +31202,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 221 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -31013,7 +31238,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 222 */
+/* 224 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31303,7 +31528,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 223 */
+/* 225 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31455,7 +31680,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 224 */
+/* 226 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31584,7 +31809,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 225 */
+/* 227 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31619,7 +31844,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 226 */
+/* 228 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31644,7 +31869,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 227 */
+/* 229 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31727,7 +31952,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 228 */
+/* 230 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31790,7 +32015,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 229 */
+/* 231 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31936,7 +32161,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 230 */
+/* 232 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32045,7 +32270,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 231 */
+/* 233 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32095,7 +32320,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 232 */
+/* 234 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32112,7 +32337,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 233 */
+/* 235 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32158,7 +32383,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 234 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -32236,7 +32461,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 235 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -32281,7 +32506,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 236 */
+/* 238 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32325,7 +32550,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 237 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -32422,7 +32647,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 238 */
+/* 240 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32608,7 +32833,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 239 */
+/* 241 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32652,7 +32877,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 240 */
+/* 242 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32660,7 +32885,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 241 */
+/* 243 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32701,7 +32926,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 242 */
+/* 244 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32768,7 +32993,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 243 */
+/* 245 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32799,7 +33024,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 244 */
+/* 246 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32828,7 +33053,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 245 */
+/* 247 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32873,7 +33098,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 246 */
+/* 248 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -32902,7 +33127,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 247 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -32933,7 +33158,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 248 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -32983,7 +33208,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 249 */
+/* 251 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -33032,7 +33257,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 250 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -33074,7 +33299,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 251 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -33168,7 +33393,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 252 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -33373,7 +33598,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 253 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -33468,7 +33693,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 254 */
+/* 256 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -33476,7 +33701,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 255 */
+/* 257 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -33628,7 +33853,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 256 */
+/* 258 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -33714,7 +33939,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 257 */
+/* 259 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -33735,7 +33960,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 258 */
+/* 260 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -33812,7 +34037,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 259 */
+/* 261 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -33934,7 +34159,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 260 */
+/* 262 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -34081,7 +34306,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 261 */
+/* 263 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -34126,7 +34351,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 262 */
+/* 264 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -34134,7 +34359,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 263 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -34193,7 +34418,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 264 */
+/* 266 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -34233,7 +34458,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 265 */
+/* 267 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -34309,18 +34534,18 @@ module.exports = {
 };
 
 /***/ }),
-/* 266 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
  * Load various JavaScript modules that assist Spark.
  */
-window.URI = __webpack_require__(299);
+window.URI = __webpack_require__(301);
 window.axios = __webpack_require__(12);
-window._ = __webpack_require__(298);
+window._ = __webpack_require__(300);
 window.moment = __webpack_require__(0);
-window.Promise = __webpack_require__(290);
-window.Cookies = __webpack_require__(285);
+window.Promise = __webpack_require__(292);
+window.Cookies = __webpack_require__(287);
 
 /*
  * Define Moment locales
@@ -34352,13 +34577,13 @@ if (window.$ === undefined || window.jQuery === undefined) {
     window.$ = window.jQuery = __webpack_require__(20);
 }
 
-__webpack_require__(270);
+__webpack_require__(272);
 
 /**
  * Load Vue if this application is using Vue as its framework.
  */
 if ($('#spark-app').length > 0) {
-    __webpack_require__(268);
+    __webpack_require__(270);
 }
 
 /**
@@ -34394,7 +34619,7 @@ window.axios.interceptors.response.use(function (response) {
 });
 
 /***/ }),
-/* 267 */
+/* 269 */
 /***/ (function(module, exports) {
 
 /**
@@ -34667,7 +34892,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 268 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -34676,7 +34901,7 @@ module.exports = {
  * Vue is the JavaScript framework used by Spark.
  */
 if (window.Vue === undefined) {
-  window.Vue = __webpack_require__(306);
+  window.Vue = __webpack_require__(309);
 
   window.Bus = new Vue();
 }
@@ -34684,20 +34909,20 @@ if (window.Vue === undefined) {
 /**
  * Load Vue Global Mixin.
  */
-Vue.mixin(__webpack_require__(225));
+Vue.mixin(__webpack_require__(227));
 
 /**
  * Define the Vue filters.
  */
-__webpack_require__(214);
+__webpack_require__(216);
 
 /**
  * Load the Spark form utilities.
  */
-__webpack_require__(215);
+__webpack_require__(217);
 
 /***/ }),
-/* 269 */
+/* 271 */
 /***/ (function(module, exports) {
 
 /*!
@@ -37080,25 +37305,25 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 270 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
-__webpack_require__(282)
-__webpack_require__(272)
-__webpack_require__(273)
+__webpack_require__(284)
 __webpack_require__(274)
 __webpack_require__(275)
 __webpack_require__(276)
 __webpack_require__(277)
-__webpack_require__(281)
 __webpack_require__(278)
 __webpack_require__(279)
+__webpack_require__(283)
 __webpack_require__(280)
-__webpack_require__(271)
+__webpack_require__(281)
+__webpack_require__(282)
+__webpack_require__(273)
 
 /***/ }),
-/* 271 */
+/* 273 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -37266,7 +37491,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 272 */
+/* 274 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -37366,7 +37591,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 273 */
+/* 275 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -37497,7 +37722,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 274 */
+/* 276 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -37740,7 +37965,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 275 */
+/* 277 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -37958,7 +38183,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 276 */
+/* 278 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -38129,7 +38354,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 277 */
+/* 279 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -38474,7 +38699,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 278 */
+/* 280 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -38588,7 +38813,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 279 */
+/* 281 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -38766,7 +38991,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 280 */
+/* 282 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -38927,7 +39152,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 281 */
+/* 283 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -39453,7 +39678,7 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 282 */
+/* 284 */
 /***/ (function(module, exports) {
 
 /* ========================================================================
@@ -39518,14 +39743,14 @@ __webpack_require__(271)
 
 
 /***/ }),
-/* 283 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(284)();
+exports = module.exports = __webpack_require__(286)();
 exports.push([module.i, "\ntable.table-eb > tbody > tr > td,\ntable.table-eb > tbody > tr > th {\n    vertical-align:middle;\n}\n\n", ""]);
 
 /***/ }),
-/* 284 */
+/* 286 */
 /***/ (function(module, exports) {
 
 /*
@@ -39581,7 +39806,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 285 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -39756,7 +39981,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 286 */
+/* 288 */
 /***/ (function(module, exports) {
 
 var asyncGenerator = function () {
@@ -40542,7 +40767,7 @@ var Echo = function () {
 module.exports = Echo;
 
 /***/ }),
-/* 287 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -57634,7 +57859,7 @@ module.exports = Echo;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(10)(module)))
 
 /***/ }),
-/* 288 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -57883,10 +58108,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 288;
+webpackContext.id = 290;
 
 /***/ }),
-/* 289 */
+/* 291 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -58076,17 +58301,17 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 290 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(294)
+module.exports = __webpack_require__(296)
 
 
 /***/ }),
-/* 291 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58106,7 +58331,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
 
 
 /***/ }),
-/* 292 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58220,7 +58445,7 @@ Promise.prototype['catch'] = function (onRejected) {
 
 
 /***/ }),
-/* 293 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58243,22 +58468,22 @@ Promise.prototype['finally'] = function (f) {
 
 
 /***/ }),
-/* 294 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 module.exports = __webpack_require__(3);
-__webpack_require__(291);
 __webpack_require__(293);
-__webpack_require__(292);
 __webpack_require__(295);
-__webpack_require__(296);
+__webpack_require__(294);
+__webpack_require__(297);
+__webpack_require__(298);
 
 
 /***/ }),
-/* 295 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58268,7 +58493,7 @@ __webpack_require__(296);
 // for node.js interop
 
 var Promise = __webpack_require__(3);
-var asap = __webpack_require__(142);
+var asap = __webpack_require__(143);
 
 module.exports = Promise;
 
@@ -58395,7 +58620,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
 
 
 /***/ }),
-/* 296 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58464,7 +58689,7 @@ Promise.disableSynchronous = function() {
 
 
 /***/ }),
-/* 297 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -62602,7 +62827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 
 /***/ }),
-/* 298 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -64157,7 +64382,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscor
 
 
 /***/ }),
-/* 299 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -66465,18 +66690,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 300 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(303)
+__webpack_require__(306)
 
-var Component = __webpack_require__(301)(
+var Component = __webpack_require__(139)(
   /* script */
-  __webpack_require__(160),
+  __webpack_require__(161),
   /* template */
-  __webpack_require__(302),
+  __webpack_require__(305),
   /* scopeId */
   null,
   /* cssModules */
@@ -66503,64 +66728,274 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 301 */
-/***/ (function(module, exports) {
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
 
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
+var Component = __webpack_require__(139)(
+  /* script */
+  __webpack_require__(162),
+  /* template */
+  __webpack_require__(304),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/ubuntu/workspace/ebbot.io/resources/assets/js/components/EnvironmentAdd.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] EnvironmentAdd.vue: functional components are not supported with templates, they should use render functions.")}
 
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  scopeId,
-  cssModules
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7267d4ec", Component.options)
+  } else {
+    hotAPI.reload("data-v-7267d4ec", Component.options)
   }
+})()}
 
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  // inject cssModules
-  if (cssModules) {
-    var computed = Object.create(options.computed || null)
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-    options.computed = computed
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
+module.exports = Component.exports
 
 
 /***/ }),
-/* 302 */
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [(_vm.intro === true) ? _c('div', [_c('div', {
+    staticClass: "media"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h3', {
+    staticClass: "media-heading"
+  }, [_vm._v("Add addtional Elastic Beanstalk Environments")]), _vm._v(" "), _c('p', [_vm._v("\n                        Its really easy to quickly add all your applications to Beanbot\n                        the following step-by-step wizard makes it a matter of a few mintues.\n                    ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.intro = false
+      }
+    }
+  }, [_vm._v("Let's Get Started")])])])]) : _vm._e(), _vm._v(" "), (_vm.intro !== true) ? _c('div', [_c('div', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-left"
+  }, [(_vm.arn === '') ? _c('i', {
+    staticClass: "fa fa-circle-o fa-2x"
+  }) : _c('i', {
+    staticClass: "fa fa-check-circle-o fa-2x status-ok"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h3', {
+    staticClass: "media-heading"
+  }, [_vm._v("Create / Find a SNS Topic ARN")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(1), _vm._v(" "), _c('ol', [_c('li', [_vm._m(2), _c('br'), _vm._v("\n                                Create a new topic (or use one you already have for elastic beanstalk apps)."), _c('br'), _c('br'), _vm._v(" "), _c('ol', [_vm._m(3), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Subscribe BeanBot to the new Topic")]), _c('br'), _vm._v("\n                                        Select the checkbox next to the new topic and then click "), _c('code', [_vm._v("Actions > Subscribe to topic")]), _vm._v(" "), _c('table', {
+    staticClass: "table"
+  }, [_vm._m(4), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Endpoint")]), _c('td', [_vm._v(_vm._s(_vm.endpoint))])])])])]), _vm._v(" "), _c('br')]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Paste the Topic's ARN here")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.arn),
+      expression: "arn"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.arn)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.arn = $event.target.value
+      }
+    }
+  })])])]) : _c('div', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.arn),
+      expression: "arn"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Your Topic's ARN"
+    },
+    domProps: {
+      "value": (_vm.arn)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.arn = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('br')])])]), _vm._v(" "), _c('div', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-left"
+  }, [(_vm.arn === '') ? _c('i', {
+    staticClass: "fa fa-circle-o fa-2x"
+  }) : _c('i', {
+    staticClass: "fa fa-rocket fa-2x"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h3', {
+    staticClass: "media-heading"
+  }, [_vm._v("Update Elastic Beanstalk Environment to send Notifications")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(5)]) : _c('div', [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "form-horizontal"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label",
+    attrs: {
+      "for": "region"
+    }
+  }, [_vm._v("EB Region")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.region),
+      expression: "region"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "region",
+      "placeholder": "us-east-1"
+    },
+    domProps: {
+      "value": (_vm.region)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.region = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label",
+    attrs: {
+      "for": "eb_appliation"
+    }
+  }, [_vm._v("Application")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.eb_appliation),
+      expression: "eb_appliation"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "eb_appliation",
+      "placeholder": "application-name-here"
+    },
+    domProps: {
+      "value": (_vm.eb_appliation)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.eb_appliation = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label",
+    attrs: {
+      "for": "eb_environment"
+    }
+  }, [_vm._v("Environment")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-8"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.eb_environment),
+      expression: "eb_environment"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "eb_environment",
+      "placeholder": "environment-name-here"
+    },
+    domProps: {
+      "value": (_vm.eb_environment)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.eb_environment = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-sm-8 col-sm-offset-2"
+  }, [_c('br'), _vm._v(" "), _c('strong', [_vm._v("Execute the following command in your terminal:")]), _vm._v(" "), _c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "readonly": "",
+      "rows": "5"
+    }
+  }, [_vm._v("aws --region " + _vm._s(_vm.region) + " elasticbeanstalk update-environment \\\n--application-name " + _vm._s(_vm.eb_appliation) + " \\\n--environment-name " + _vm._s(_vm.eb_environment) + " \\\n--option-settings Namespace=aws:elasticbeanstalk:sns:topics,OptionName=\"Notification Topic ARN\",Value=" + _vm._s(_vm.arn))])])])])])])])]) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "media-left"
+  }, [_c('i', {
+    staticClass: "fa fa-plus-circle fa-2x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', [_c('span', {
+    staticClass: "status-ok"
+  }, [_c('strong', [_vm._v("You only need one ARN for all \n                                environments")]), _vm._v(" but can have a dedicated \n                                ARN per environment. It is up to you and your organization's prefences / needs.\n                            ")]), _c('br'), _vm._v(" "), _c('small', [_vm._v("BeanBot uses webhooks powered by SNS to update you on the state\n                            of your elastic beanstalk environment.\n                            This keeps your stack secure by not prodividing BeanBot with \n                            any sensitive keys.")]), _c('br'), _c('br')])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('strong', [_vm._v("Go to "), _c('a', {
+    attrs: {
+      "href": "https://console.aws.amazon.com/sns/v2/home#/topics",
+      "target": "_blank"
+    }
+  }, [_vm._v("https://console.aws.amazon.com/sns/v2/home#/topics")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('strong', [_vm._v("Create a New Topic")]), _c('br'), _vm._v(" \n                                        Click "), _c('code', [_vm._v("Create New Topic")]), _vm._v(", the \n                                        names are up to you. We recommend BeanBot.\n                                        "), _c('br'), _vm._v(" "), _c('br')])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('tr', [_c('th', [_vm._v("Protocol")]), _c('td', [_vm._v("HTTPS")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', [_c('small', [_vm._v("We can't configure the environments yet! We need the ARN first!")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', [_c('small', [_vm._v("The only way to configure elastic beanstalk \n                            notifications is to run a command in the \n                            "), _c('a', {
+    attrs: {
+      "href": "https://aws.amazon.com/cli/",
+      "target": "_blank"
+    }
+  }, [_vm._v("AWS CLI")]), _vm._v(". \n                            The following steps will generate the correct command for your applications.")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7267d4ec", module.exports)
+  }
+}
+
+/***/ }),
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -66664,17 +67099,17 @@ if (false) {
 }
 
 /***/ }),
-/* 303 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(283);
+var content = __webpack_require__(285);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(304)("77dd76ad", content, false);
+var update = __webpack_require__(307)("77dd76ad", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66690,7 +67125,7 @@ if(false) {
 }
 
 /***/ }),
-/* 304 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -66709,7 +67144,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(305)
+var listToStyles = __webpack_require__(308)
 
 /*
 type StyleObject = {
@@ -66911,7 +67346,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 305 */
+/* 308 */
 /***/ (function(module, exports) {
 
 /**
@@ -66944,7 +67379,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 306 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -77134,542 +77569,12 @@ return Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 307 */,
-/* 308 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(139);
-
-
-/***/ }),
-/* 309 */,
 /* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */,
-/* 330 */,
-/* 331 */,
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */,
-/* 345 */,
-/* 346 */,
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */,
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */,
-/* 361 */,
-/* 362 */,
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
-/* 368 */,
-/* 369 */,
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */,
-/* 376 */,
-/* 377 */,
-/* 378 */,
-/* 379 */,
-/* 380 */,
-/* 381 */,
-/* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */,
-/* 386 */,
-/* 387 */,
-/* 388 */,
-/* 389 */,
-/* 390 */,
-/* 391 */,
-/* 392 */,
-/* 393 */,
-/* 394 */,
-/* 395 */,
-/* 396 */,
-/* 397 */,
-/* 398 */,
-/* 399 */,
-/* 400 */,
-/* 401 */,
-/* 402 */,
-/* 403 */,
-/* 404 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ["endpoint", "intro"],
-
-    data: function data() {
-        return {
-            arn: '',
-            region: 'us-east-1',
-            eb_appliation: '',
-            eb_environment: ''
-        };
-    },
-    mounted: function mounted() {}
-});
-
-/***/ }),
-/* 405 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(301)(
-  /* script */
-  __webpack_require__(404),
-  /* template */
-  __webpack_require__(406),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/ubuntu/workspace/ebbot.io/resources/assets/js/components/EnvironmentAdd.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] EnvironmentAdd.vue: functional components are not supported with templates, they should use render functions.")}
+module.exports = __webpack_require__(140);
 
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7267d4ec", Component.options)
-  } else {
-    hotAPI.reload("data-v-7267d4ec", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 406 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.intro === true) ? _c('div', [_c('div', {
-    staticClass: "media"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "media-body"
-  }, [_c('h3', {
-    staticClass: "media-heading"
-  }, [_vm._v("Add addtional Elastic Beanstalk Environments")]), _vm._v(" "), _c('p', [_vm._v("\n                        Its really easy to quickly add all your applications to Beanbot\n                        the following step-by-step wizard makes it a matter of a few mintues.\n                    ")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        _vm.intro = false
-      }
-    }
-  }, [_vm._v("Let's Get Started")])])])]) : _vm._e(), _vm._v(" "), (_vm.intro !== true) ? _c('div', [_c('div', {
-    staticClass: "media"
-  }, [_c('div', {
-    staticClass: "media-left"
-  }, [(_vm.arn === '') ? _c('i', {
-    staticClass: "fa fa-circle-o fa-2x"
-  }) : _c('i', {
-    staticClass: "fa fa-check-circle-o fa-2x status-ok"
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "media-body"
-  }, [_c('h3', {
-    staticClass: "media-heading"
-  }, [_vm._v("Create / Find a SNS Topic ARN")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(1), _vm._v(" "), _c('ol', [_c('li', [_vm._m(2), _c('br'), _vm._v("\n                                Create a new topic (or use one you already have for elastic beanstalk apps)."), _c('br'), _c('br'), _vm._v(" "), _c('ol', [_vm._m(3), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Subscribe BeanBot to the new Topic")]), _c('br'), _vm._v("\n                                        Select the checkbox next to the new topic and then click "), _c('code', [_vm._v("Actions > Subscribe to topic")]), _vm._v(" "), _c('table', {
-    staticClass: "table"
-  }, [_vm._m(4), _vm._v(" "), _c('tr', [_c('th', [_vm._v("Endpoint")]), _c('td', [_vm._v(_vm._s(_vm.endpoint))])])])])]), _vm._v(" "), _c('br')]), _vm._v(" "), _c('li', [_c('strong', [_vm._v("Paste the Topic's ARN here")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.arn),
-      expression: "arn"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.arn)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.arn = $event.target.value
-      }
-    }
-  })])])]) : _c('div', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.arn),
-      expression: "arn"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "Your Topic's ARN"
-    },
-    domProps: {
-      "value": (_vm.arn)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.arn = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('br')])])]), _vm._v(" "), _c('div', {
-    staticClass: "media"
-  }, [_c('div', {
-    staticClass: "media-left"
-  }, [(_vm.arn === '') ? _c('i', {
-    staticClass: "fa fa-circle-o fa-2x"
-  }) : _c('i', {
-    staticClass: "fa fa-rocket fa-2x"
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "media-body"
-  }, [_c('h3', {
-    staticClass: "media-heading"
-  }, [_vm._v("Update Elastic Beanstalk Environment to send Notifications")]), _vm._v(" "), (_vm.arn === '') ? _c('div', [_vm._m(5)]) : _c('div', [_vm._m(6), _vm._v(" "), _c('div', {
-    staticClass: "form-horizontal"
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-2 control-label",
-    attrs: {
-      "for": "region"
-    }
-  }, [_vm._v("EB Region")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.region),
-      expression: "region"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "region",
-      "placeholder": "us-east-1"
-    },
-    domProps: {
-      "value": (_vm.region)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.region = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-2 control-label",
-    attrs: {
-      "for": "eb_appliation"
-    }
-  }, [_vm._v("Application")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.eb_appliation),
-      expression: "eb_appliation"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "eb_appliation",
-      "placeholder": "application-name-here"
-    },
-    domProps: {
-      "value": (_vm.eb_appliation)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.eb_appliation = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-sm-2 control-label",
-    attrs: {
-      "for": "eb_environment"
-    }
-  }, [_vm._v("Environment")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-8"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.eb_environment),
-      expression: "eb_environment"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "eb_environment",
-      "placeholder": "environment-name-here"
-    },
-    domProps: {
-      "value": (_vm.eb_environment)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.eb_environment = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-sm-8 col-sm-offset-2"
-  }, [_c('br'), _vm._v(" "), _c('strong', [_vm._v("Execute the following command in your terminal:")]), _vm._v(" "), _c('textarea', {
-    staticClass: "form-control",
-    attrs: {
-      "readonly": "",
-      "rows": "5"
-    }
-  }, [_vm._v("aws --region " + _vm._s(_vm.region) + " elasticbeanstalk update-environment \\\n--application-name " + _vm._s(_vm.eb_appliation) + " \\\n--environment-name " + _vm._s(_vm.eb_environment) + " \\\n--option-settings Namespace=aws:elasticbeanstalk:sns:topics,OptionName=\"Notification Topic ARN\",Value=" + _vm._s(_vm.arn))])])])])])])])]) : _vm._e()])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "media-left"
-  }, [_c('i', {
-    staticClass: "fa fa-plus-circle fa-2x"
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_c('span', {
-    staticClass: "status-ok"
-  }, [_c('strong', [_vm._v("You only need one ARN for all \n                                environments")]), _vm._v(" but can have a dedicated \n                                ARN per environment. It is up to you and your organization's prefences / needs.\n                            ")]), _c('br'), _vm._v(" "), _c('small', [_vm._v("BeanBot uses webhooks powered by SNS to update you on the state\n                            of your elastic beanstalk environment.\n                            This keeps your stack secure by not prodividing BeanBot with \n                            any sensitive keys.")]), _c('br'), _c('br')])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('strong', [_vm._v("Go to "), _c('a', {
-    attrs: {
-      "href": "https://console.aws.amazon.com/sns/v2/home#/topics",
-      "target": "_blank"
-    }
-  }, [_vm._v("https://console.aws.amazon.com/sns/v2/home#/topics")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('strong', [_vm._v("Create a New Topic")]), _c('br'), _vm._v(" \n                                        Click "), _c('code', [_vm._v("Create New Topic")]), _vm._v(", the \n                                        names are up to you. We recommend BeanBot.\n                                        "), _c('br'), _vm._v(" "), _c('br')])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('tr', [_c('th', [_vm._v("Protocol")]), _c('td', [_vm._v("HTTPS")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_c('small', [_vm._v("We can't configure the environments yet! We need the ARN first!")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_c('small', [_vm._v("The only way to configure elastic beanstalk \n                            notifications is to run a command in the \n                            "), _c('a', {
-    attrs: {
-      "href": "https://aws.amazon.com/cli/",
-      "target": "_blank"
-    }
-  }, [_vm._v("AWS CLI")]), _vm._v(". \n                            The following steps will generate the correct command for your applications.")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7267d4ec", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
