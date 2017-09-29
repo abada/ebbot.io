@@ -28,4 +28,15 @@ class HomeController extends Controller
         $team = $request->user()->currentTeam;
         return view('dashboard', ['team' => $team]);
     }
+    
+    /**
+     * Show the application dashboard.
+     *
+     * @return Response
+     */
+    public function showTV(Request $request)
+    {
+        $team = $request->user()->currentTeam;
+        return view('dashboard_tv', ['team' => $team]);
+    }
 }

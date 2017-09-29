@@ -26,6 +26,7 @@ Route::get('/', 'WelcomeController@show');
 Route::group(['middleware' => 'auth'], function() {
     
     Route::get('/home', 'HomeController@show');
+    Route::get('/tv', 'HomeController@showTV');
     
     Route::group(['namespace' => 'EbEnvironment'], function() {
        
