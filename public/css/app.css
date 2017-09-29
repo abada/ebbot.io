@@ -7426,14 +7426,14 @@ body {
       -ms-flex-align: center;
           align-items: center;
   color: #FFF;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6eaf5d+0,6eaf5d+4,0a4f99+4,207cca+100 */
-  background: #6eaf5d;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#333333+0,333333+4,0a4f99+4,207cca+100 */
+  background: #333333;
   /* Old browsers */
   /* FF3.6-15 */
   /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #6eaf5d 0%, #6eaf5d 4%, #0a4f99 4%, #207cca 100%);
+  background: linear-gradient(135deg, #333333 0%, #333333 4%, #0a4f99 4%, #207cca 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6eaf5d', endColorstr='#207cca', GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#207cca', GradientType=1);
   /* IE6-9 fallback on horizontal gradient */
 }
 .hero .brand {
