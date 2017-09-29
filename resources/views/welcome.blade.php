@@ -22,7 +22,7 @@
                     </li>
                     <li>
                         <strong>Insights:</strong>
-                        <small>Deploy Runtime / Deploy Rate / Status Reporting</small>
+                        <small>Deploy Runtime / Deploy Rate / Status Change Logs</small>
                     </li>
                 </ul>
                 
