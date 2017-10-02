@@ -8,12 +8,23 @@
                     'alert-success': environment.status.status === 'Ok' || environment.status.status === 'Info',
                     }">
                     
-                    <i class="fa fa" v-bind:class="{
-                        'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null,
-                        'fa-circle': environment.last_deployment == null || environment.last_deployment.deployment_completed_at !== null}"></i>&nbsp;&nbsp;
-                    
-                    {{ environment.eb_environment }}
-                    
+                    <div class="media">
+                        <div class="media-left">
+                            
+                            <i class="fa fa fa-3x" v-bind:class="{
+                                'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null,
+                                'fa-circle': environment.last_deployment == null || environment.last_deployment.deployment_completed_at !== null}"></i>
+                            
+                            
+                        </div>
+                        <div class="media-body">
+                            
+                            <strong>{{ environment.eb_environment }}</strong><br />
+                            <small>{{ environment.eb_application }}</small>
+                            
+                        </div>
+                    </div>
+                
                 </div>
             </div>
         </div>
