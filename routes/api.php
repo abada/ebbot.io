@@ -18,6 +18,7 @@ Route::group([
     Route::group(['namespace' => 'API\Dashboard'], function() {
         
         Route::get('/dashboard', 'DashboardController@index');
+        Route::get('/dashboard/tv', 'DashboardController@tv');
         
     });
     

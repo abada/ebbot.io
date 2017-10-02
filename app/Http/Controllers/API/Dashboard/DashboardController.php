@@ -30,4 +30,18 @@ class DashboardController extends Controller
         
     }
     
+    public function tv(Request $request)
+    {
+        
+        $team = $request->user()->currentTeam;
+        $envs = $team->ebenvironments()
+            ->with(['status', 'last_deployment'])
+            ->orderBy('eb_application')
+            ->orderBy('eb_environment')
+            ->get();
+            
+        return $envs;
+        
+    }
+    
 }

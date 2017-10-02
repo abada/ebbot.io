@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid" v-if="applications !== null && teamHasApplications">
-        <div class="row" v-for="(environments, application) in applications">
-            <div class="col-md-3" v-for="environment in environments">
+        <div class="row">
+            <div class="col-md-3" v-for="environment in applications">
                 <div class="alert" v-bind:class="{ 
                     'alert-danger': environment.status.status === 'Severe' ||  environment.status.status === 'Degraded', 
                     'alert-warning': environment.status.status === 'Warning' || environment.status.status === 'Unknown',
@@ -45,11 +45,10 @@
                 
                 var vm = this;
                 
-                axios.get('/api/dashboard')
+                axios.get('/api/dashboard/tv')
                     .then(function(response) {
                         vm.applications = response.data;
-                        console.log(vm.applications);
-                        vm.teamHasApplications = !Array.isArray(vm.applications);
+                        vm.teamHasApplications = true
                     })
                     .catch(function(error) {
                         console.log(error);
