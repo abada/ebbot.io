@@ -29561,6 +29561,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 var moment = __webpack_require__(0);
@@ -67236,32 +67239,38 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return (_vm.applications !== null && _vm.teamHasApplications) ? _c('div', {
     staticClass: "container-fluid"
-  }, [_c('div', {
-    staticClass: "row"
-  }, _vm._l((_vm.applications), function(environment) {
-    return _c('div', {
-      staticClass: "col-md-3"
-    }, [_c('div', {
-      staticClass: "alert",
-      class: {
-        'alert-danger': environment.status.status === 'Severe' || environment.status.status === 'Degraded',
-          'alert-warning': environment.status.status === 'Warning' || environment.status.status === 'Unknown',
-          'alert-success': environment.status.status === 'Ok' || environment.status.status === 'Info',
+  }, _vm._l((_vm.applications), function(environments, group) {
+    return _c('div', [_c('h1', {
+      staticStyle: {
+        "color": "#FFF"
       }
-    }, [_c('div', {
-      staticClass: "media"
-    }, [_c('div', {
-      staticClass: "media-left"
-    }, [_c('i', {
-      staticClass: "fa fa fa-3x",
-      class: {
-        'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null,
-          'fa-circle': environment.last_deployment == null || environment.last_deployment.deployment_completed_at !== null
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "media-body"
-    }, [_c('strong', [_vm._v(_vm._s(environment.eb_environment))]), _c('br'), _vm._v(" "), _c('small', [_vm._v(_vm._s(environment.eb_application))])])])])])
-  }))]) : _vm._e()
+    }, [_vm._v(_vm._s(group))]), _vm._v(" "), _c('div', {
+      staticClass: "row"
+    }, _vm._l((environments), function(environment) {
+      return _c('div', {
+        staticClass: "col-md-3"
+      }, [_c('div', {
+        staticClass: "alert",
+        class: {
+          'alert-danger': environment.status.status === 'Severe' || environment.status.status === 'Degraded',
+            'alert-warning': environment.status.status === 'Warning' || environment.status.status === 'Unknown',
+            'alert-success': environment.status.status === 'Ok' || environment.status.status === 'Info',
+        }
+      }, [_c('div', {
+        staticClass: "media"
+      }, [_c('div', {
+        staticClass: "media-left"
+      }, [_c('i', {
+        staticClass: "fa fa fa-3x",
+        class: {
+          'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null,
+            'fa-circle': environment.last_deployment == null || environment.last_deployment.deployment_completed_at !== null
+        }
+      })]), _vm._v(" "), _c('div', {
+        staticClass: "media-body"
+      }, [_c('strong', [_vm._v(_vm._s(environment.eb_environment))]), _c('br'), _vm._v(" "), _c('small', [_vm._v(_vm._s(environment.eb_application))])])])])])
+    }))])
+  })) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

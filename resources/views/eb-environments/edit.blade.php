@@ -18,18 +18,20 @@
                     </h3>
                     <hr />
                     <div class="settings-section" style="padding-left:20px;">
-                        <div class="media">
-                            <div class="media-left">
-                                <input type="checkbox" name="dashboard_tv" @if($eb_environment->dashboard_tv) checked="" @endif />
+                        <div class="form-group">
+                                <div class="col-sm-9 col-md-offset-1">
+                                    <label for="dashboard_tv">
+                                        <input type="checkbox" name="dashboard_tv" id="dashboard_tv" @if($eb_environment->dashboard_tv) checked="" @endif />&nbsp;
+                                        Show on TV Dashboard
+                                    </label>
+                                </div>
                             </div>
-                            <div class="media-body">
-                                <strong>
-                                    Show on TV Dashboard
-                                    (<small><a href="/tv" target="_blank">Preview <i class="fa fa-external-link"></i></a></small>)
-                                </strong><br />
-                                <small>Choose whether or not to show this environment on the TV dashboard.</small>
+                            <div class="form-group">
+                                <label for="dashboard_tv_group" class="col-sm-1 control-label">Group</label>
+                                <div class="col-sm-6">
+                                    <input name="dashboard_tv_group" type="text" class="form-control" id="dashboard_tv_group" placeholder="Production, Staging, api.company.com..." value="{{ $eb_environment->dashboard_tv_group }}">
+                                </div>
                             </div>
-                        </div>         
                     </div>
                     <br />
                     <br />

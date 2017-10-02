@@ -41,6 +41,8 @@ class DashboardController extends Controller
             ->orderBy('eb_environment')
             ->get();
             
+        return $this->ebEnvironmentRepo->organizeForTV($envs);
+            
         return $envs;
         
     }
