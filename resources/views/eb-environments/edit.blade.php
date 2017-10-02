@@ -14,6 +14,24 @@
                     {{ method_field('PUT') }}
                     
                     <h3>
+                        Dashboard
+                    </h3>
+                    <hr />
+                    <div class="settings-section" style="padding-left:20px;">
+                        <div class="media">
+                            <div class="media-left">
+                                <input type="checkbox" name="dashboard_tv" @if($eb_environment->dashboard_tv) checked="" @endif />
+                            </div>
+                            <div class="media-body">
+                                <strong>Show on TV Dashboard</strong><br />
+                                <small>Choose whether or not to show this environment on the TV dashboard.</small>
+                            </div>
+                        </div>         
+                    </div>
+                    <br />
+                    <br />
+                    
+                    <h3>
                         Notifications ({{ $eb_environment->notification_count }})
                     </h3>
                     <hr />

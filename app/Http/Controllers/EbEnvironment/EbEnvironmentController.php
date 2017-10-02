@@ -41,6 +41,9 @@ class EbEnvironmentController extends Controller
         
         // PREFERENCES
         
+        // dashboards
+        $eb_environment->dashboard_tv = $request->has('dashboard_tv');
+        
         // deployments
         $eb_environment->notify_deployment_start = $request->has('notify_deployment_start');
         $eb_environment->notify_deployment_complete = $request->has('notify_deployment_complete');

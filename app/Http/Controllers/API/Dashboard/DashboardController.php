@@ -36,6 +36,7 @@ class DashboardController extends Controller
         $team = $request->user()->currentTeam;
         $envs = $team->ebenvironments()
             ->with(['status', 'last_deployment'])
+            ->where('dashboard_tv', 1)
             ->orderBy('eb_application')
             ->orderBy('eb_environment')
             ->get();
