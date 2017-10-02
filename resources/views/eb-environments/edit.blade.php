@@ -23,7 +23,10 @@
                                 <input type="checkbox" name="dashboard_tv" @if($eb_environment->dashboard_tv) checked="" @endif />
                             </div>
                             <div class="media-body">
-                                <strong>Show on TV Dashboard</strong><br />
+                                <strong>
+                                    Show on TV Dashboard
+                                    (<small><a href="/tv" target="_blank">Preview <i class="fa fa-external-link"></i></a></small>)
+                                </strong><br />
                                 <small>Choose whether or not to show this environment on the TV dashboard.</small>
                             </div>
                         </div>         
