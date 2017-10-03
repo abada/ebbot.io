@@ -21,8 +21,8 @@
                             </div>
                             <div class="media-body">
                                 
-                                <strong>{{ environment.eb_environment }}</strong><br />
-                                <small>{{ environment.eb_application }}</small>
+                                <strong>{{ environment.eb_application }}</strong><br />
+                                <small>{{ environment.eb_environment }}</small>
                                 
                             </div>
                         </div>
