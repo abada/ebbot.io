@@ -36,6 +36,7 @@ class DeploymentComplete implements Trigger
         $deployment = $this->deploymentRepo->getLastDeploymentForEbEnvironment($env);
         if(is_null($deployment->deployment_completed_at)) {
             $deployment->deployment_completed_at = $eb_event->getEbTimestamp();
+            $deployment->duration = $deployment->created_at->diffInSeconds($deployment->deployment_completed_at);
             $deployment->save();
         }
         
