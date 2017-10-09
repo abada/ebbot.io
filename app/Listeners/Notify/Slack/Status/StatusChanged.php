@@ -89,6 +89,7 @@ class StatusChanged
         // SAVE NOTIFICATION
         $bbNotification = new BbNotifcation;
         $bbNotification->team_id = $environment->team_id;
+        $bbNotification->platform = 'slack';
         $bbNotification->message = $message;
         $bbNotification->attachment = json_encode($attachment);
         $bbNotification->notifiable()->associate($status);
