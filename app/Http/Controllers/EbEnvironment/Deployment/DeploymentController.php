@@ -13,9 +13,11 @@ class DeploymentController extends Controller
         $eb_environment = $request->user()
             ->currentTeam()->ebenvironments()->find($eb_environment_id);
             
-        $deployments = $eb_environment->deployments()->orderBy('id', 'DESC')->paginate(50);
+        $deployments = $eb_environment->deployments()
+            ->orderBy('id', 'DESC')->paginate(50);
         
-        return view('eb-environments.deployments.index', ['eb_environment' => $eb_environment, 'deployments' => $deployments]);
+        return view('eb-environments.deployments.index', [
+            'eb_environment' => $eb_environment, 'deployments' => $deployments]);
     }
        
 }

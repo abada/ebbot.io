@@ -13,7 +13,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        // BACKFILL
         Commands\BackfillDeploymentDuration::class,
+        
+        // METRICS
+        Commands\MetricsDay::class,
     ];
 
     /**
@@ -24,8 +28,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $env = config('app.env');
+        
+        $schedule->command('spark:kpi')->daily()
+            ->pingBefore("https://envbeat.com/ping/B0BXW8hOn84stxrkrX0e?env={$env}")
+            ->thenPing("https://envbeat.com/ping/B0BXW8hOn84stxrkrX0e?env={$env}&ended");
+            
+        $schedule->command('metrics:day')->daily()
+            ->pingBefore("https://envbeat.com/ping/lHud6gQtS77KH2m3zFup?env={$env}")
+            ->thenPing("https://envbeat.com/ping/lHud6gQtS77KH2m3zFup?env={$env}&ended");
     }
 
     /**
