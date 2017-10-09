@@ -30,10 +30,15 @@ Route::group(['middleware' => 'auth'], function() {
     
     Route::group(['namespace' => 'EbEnvironment'], function() {
        
-       Route::get('/eb-environments', 'EbEnvironmentController@index');
-       Route::get('/eb-environments/{id}', 'EbEnvironmentController@show');
-       Route::get('/eb-environments/{id}/settings', 'EbEnvironmentController@edit');
-       Route::put('/eb-environments/{id}', 'EbEnvironmentController@update');
+        Route::get('/eb-environments', 'EbEnvironmentController@index');
+        Route::get('/eb-environments/{id}', 'EbEnvironmentController@show');
+        Route::get('/eb-environments/{id}/settings', 'EbEnvironmentController@edit');
+        Route::put('/eb-environments/{id}', 'EbEnvironmentController@update');
+       
+        Route::group(['namespace' => 'Deployment'], function() {
+            Route::get('/eb-environments/{id}/deployments', 'DeploymentController@index');   
+        });
+       
         
     });
 
