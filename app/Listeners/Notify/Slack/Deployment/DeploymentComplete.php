@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Notify\Slack\Deployment;
 
+use App\BbNotifcation;
 use App\Events\EbEnvironmentDeployCompleted;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -48,19 +49,28 @@ class DeploymentComplete
         ]);
         
         $duration_str = $deploy->created_at->diffForHumans($deploy->deployment_completed_at, true);
+        $message = 'Deploy finished for '.$environment->eb_environment.'.';
+        $attachment = [
+        	'fallback' => $message,
+        	'text' => $message,
+        	'color' => 'good',
+        	'fields' => [
+        		[
+        			'title' => 'Duration',
+        			'value' => $duration_str,
+        			'short' => true
+        		],
+        	]
+        ];
         
-        $slack->attach(
-            [
-            	'fallback' => 'Deploy finished for '.$environment->eb_environment.'.',
-            	'text' => 'Deploy finished for '.$environment->eb_environment.'.',
-            	'color' => 'good',
-            	'fields' => [
-            		[
-            			'title' => 'Duration',
-            			'value' => $duration_str,
-            			'short' => true
-            		],
-            	]
-            ])->send();
+        $slack->attach($attachment)->send();
+            
+        // SAVE NOTIFICATION
+        $bbNotification = new BbNotifcation;
+        $bbNotification->team_id = $environment->team_id;
+        $bbNotification->message = $message;
+        $bbNotification->attachment = json_encode($attachment);
+        $bbNotification->notifiable()->associate($deploy);
+        $bbNotification->save();
     }
 }

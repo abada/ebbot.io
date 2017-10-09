@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Notify\Slack\Deployment;
 
+use App\BbNotifcation;
 use App\Events\EbEnvironmentDeployHealthy;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -50,23 +51,33 @@ class DeploymentHealthy
         $duration_str = $deploy->created_at->diffForHumans($deploy->deployment_completed_at, true);
         $healthy_str = $deploy->created_at->diffForHumans($deploy->deployment_healthy_at, true);
         
-        $slack->attach(
-            [
-            	'fallback' => 'Deploy healthy for '.$environment->eb_environment.'.',
-            	'text' => 'Deploy healthy for '.$environment->eb_environment.'.',
-            	'color' => 'good',
-            	'fields' => [
-            		[
-            			'title' => 'Duration',
-            			'value' => $duration_str,
-            			'short' => true
-            		],
-            		[
-            			'title' => 'Healthy After',
-            			'value' => $healthy_str,
-            			'short' => true
-            		],
-            	]
-            ])->send();
+        $message = 'Deploy healthy for '.$environment->eb_environment.'.';
+        $attachment = [
+        	'fallback' => $message,
+        	'text' => $message,
+        	'color' => 'good',
+        	'fields' => [
+        		[
+        			'title' => 'Duration',
+        			'value' => $duration_str,
+        			'short' => true
+        		],
+        		[
+        			'title' => 'Healthy After',
+        			'value' => $healthy_str,
+        			'short' => true
+        		],
+        	]
+        ];
+        
+        $slack->attach($attachment)->send();
+            
+        // SAVE NOTIFICATION
+        $bbNotification = new BbNotifcation;
+        $bbNotification->team_id = $environment->team_id;
+        $bbNotification->message = $message;
+        $bbNotification->attachment = json_encode($attachment);
+        $bbNotification->notifiable()->associate($deploy);
+        $bbNotification->save();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Notify\Slack\Status;
 
+use App\BbNotifcation;
 use App\Events\EbEnvironmentStatusChanged;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -74,13 +75,24 @@ class StatusChanged
         
         $statusColor = $this->statusColorMap[strtolower($status->status)];
         
-        $slack->attach(
-            [
-            	'fallback' => strtoupper($status->status).': '.$environment->eb_environment,
-            	'text' => strtoupper($status->status).': '.$environment->eb_environment,
-            	'color' => $notifyForCurrentStatus ? $statusColor : 'good',
-            	'fields' => [],
-            ])->send();
+        
+        $message = strtoupper($status->status).': '.$environment->eb_environment;
+        $attachment = [
+        	'fallback' => $message,
+        	'text' => $message,
+        	'color' => $notifyForCurrentStatus ? $statusColor : 'good',
+        	'fields' => [],
+        ];
+        
+        $slack->attach($attachment)->send();
+            
+        // SAVE NOTIFICATION
+        $bbNotification = new BbNotifcation;
+        $bbNotification->team_id = $environment->team_id;
+        $bbNotification->message = $message;
+        $bbNotification->attachment = json_encode($attachment);
+        $bbNotification->notifiable()->associate($status);
+        $bbNotification->save();
         
         
     }

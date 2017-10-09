@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Notify\Slack\Deployment;
 
+use App\BbNotifcation;
 use App\Events\EbEnvironmentDeployStarted;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -49,13 +50,24 @@ class DeploymentStart
         
         $started_str = $deploy->created_at->diffForHumans(null, true);
         
+        $message = 'Deploy running for '.$environment->eb_environment.'.';
+        $attachment = [
+        	'fallback' => $message,
+        	'text' => $message,
+        	'color' => 'warning',
+        	'fields' => []
+    	];
+        
         $slack->attach(
-            [
-            	'fallback' => 'Deploy running for '.$environment->eb_environment.'.',
-            	'text' => 'Deploy running for '.$environment->eb_environment.'.',
-            	'color' => 'warning',
-            	'fields' => []
-        	])->send();
+            )->send();
+        	
+        // SAVE NOTIFICATION
+        $bbNotification = new BbNotifcation;
+        $bbNotification->team_id = $environment->team_id;
+        $bbNotification->message = $message;
+        $bbNotification->attachment = json_encode($attachment);
+        $bbNotification->notifiable()->associate($deploy);
+        $bbNotification->save();
         
     }
 }
