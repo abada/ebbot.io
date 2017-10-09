@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\EbEnvironmentDeployment;
+use App\Repositories\DeploymentRepository;
 
 class BackfillDeploymentDuration extends Command
 {
@@ -21,14 +22,17 @@ class BackfillDeploymentDuration extends Command
      */
     protected $description = 'backfill the projected and actual deployment duration numbers';
 
+    protected $deploymentRepo;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(DeploymentRepository $deploymentRepo)
     {
         parent::__construct();
+        $this->deploymentRepo = $deploymentRepo;
     }
 
     /**
@@ -58,6 +62,7 @@ class BackfillDeploymentDuration extends Command
             }
             
             $deployment->duration = $duration;
+            $deployment->duration_projected = $this->deploymentRepo->getProjectedDeploymentDurationForEbEnvironment($deployment->eb_environment, $deployment->created_at);
             $deployment->save();
             
             $bar->advance();

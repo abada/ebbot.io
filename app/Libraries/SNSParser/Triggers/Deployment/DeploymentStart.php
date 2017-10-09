@@ -7,6 +7,7 @@ use App\Events\EbEnvironmentDeployStarted;
 use App\EbEnvironmentDeployment;
 use App\Libraries\SNSParser\Trigger;
 use App\Repositories\TeamRepository;
+use App\Repositories\DeploymentRepository;
 
 class DeploymentStart implements Trigger
 {
@@ -16,6 +17,7 @@ class DeploymentStart implements Trigger
     public function __construct() 
     {
         $this->teamRepo = new TeamRepository();
+        $this->deploymentRepo = new DeploymentRepository();
     }
     
     public function shouldFire(Event $eb_event) 
@@ -39,6 +41,7 @@ class DeploymentStart implements Trigger
         // CREATE AND SAVE DEPLOYMENT
         $deployment = new EbEnvironmentDeployment;
         $deployment->created_at = $eb_event->getEbTimestamp();
+        $deployment->duration_projected = $this->deploymentRepo->getProjectedDeploymentDurationForEbEnvironment($env);
         $env->deployments()->save($deployment);
         
         // FIRE NEW DEPLOYMENT EVENT
