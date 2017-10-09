@@ -14,7 +14,7 @@ class CreateBbNotifcationsTable extends Migration
     public function up()
     {
         Schema::create('bb_notifcations', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->bigIncrements('id');
             $table->integer('team_id')->unsigned();
             $table->string('platform');
             $table->string('notifiable_type');
