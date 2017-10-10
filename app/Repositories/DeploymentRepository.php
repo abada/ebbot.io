@@ -27,9 +27,10 @@ class DeploymentRepository
         
         // DETERMINE AVG & STDDEV
         $duration_avg = Statistics::mean($durations);
-        $duration_stddev = Statistics::standardDeviation($durations);
+        //$duration_stddev = Statistics::standardDeviation($durations);
         
-        return $duration_avg + $duration_stddev;
+        //return $duration_avg + $duration_stddev;
+        return $duration_avg;
     }
     
 }
