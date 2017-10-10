@@ -46,7 +46,7 @@ class StatusChange implements Trigger
         $env->statuses()->save($status);
         
         // FIRE NEW ENVIRONMENT STATUS EVENT
-        event(new EbEnvironmentStatusChanged($env->status));
+        event(new EbEnvironmentStatusChanged($status));
     }
     
 }
