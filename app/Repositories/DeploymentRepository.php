@@ -20,7 +20,7 @@ class DeploymentRepository
         if(!is_null($before)) {
             $query = $query->where('created_at', '<', $before);
         }
-        $durations = $query->limit(10)->pluck('duration')->toArray();
+        $durations = $query->limit(5)->pluck('duration')->toArray();
         if(count($durations) < 2) {
             return null;
         }
