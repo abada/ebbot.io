@@ -35,7 +35,7 @@ class DeploymentRepository
         $limit_lower = $duration_avg - $duration_stddev;
         foreach($durations as $duration) {
             if($duration <  $limit_upper && $duration > $limit_lower) {
-                $durations_without_outliers[$duration];
+                $durations_without_outliers[] = $duration;
             }
         }
     
