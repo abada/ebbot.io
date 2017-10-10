@@ -67052,7 +67052,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "width": "1"
         }
       }, [_c('i', {
-        staticClass: "fa fa-circle fa-1x",
+        staticClass: "fa fa-2x",
         class: {
           'status-ok': environment.status.status === 'Ok',
             'status-info': environment.status.status === 'Info',

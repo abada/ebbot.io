@@ -32,7 +32,7 @@
                         'warning': environment.status.status === 'Warning'}">
                         <td width="1"></td>
                         <td width="1">
-                            <i class="fa fa-circle fa-1x" v-bind:class="{ 
+                            <i class="fa fa-2x" v-bind:class="{ 
                                 'status-ok': environment.status.status === 'Ok',
                                 'status-info': environment.status.status === 'Info',
                                 'status-warning': environment.status.status === 'Warning',
