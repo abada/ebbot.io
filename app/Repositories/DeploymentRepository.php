@@ -38,8 +38,11 @@ class DeploymentRepository
                 $durations_without_outliers[] = $duration;
             }
         }
-    
-        return Statistics::mean($durations_without_outliers);
+        
+        $duration_avg_without_outliers = Statistics::mean($durations_without_outliers);
+        $duration_projected = $duration_avg_without_outliers * 1.10;
+        
+        return $duration_projected;
     }
     
 }
