@@ -58,8 +58,7 @@ class DeploymentStart
         	'fields' => []
     	];
         
-        $slack->attach(
-            )->send();
+        $slack->attach($attachment)->send();
         	
         // SAVE NOTIFICATION
         $bbNotification = new BbNotifcation;
