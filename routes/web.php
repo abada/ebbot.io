@@ -38,6 +38,10 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['namespace' => 'Deployment'], function() {
             Route::get('/eb-environments/{id}/deployments', 'DeploymentController@index');   
         });
+        
+        Route::group(['namespace' => 'Status'], function() {
+            Route::get('/eb-environments/{id}/status', 'StatusController@index');   
+        });
        
         
     });

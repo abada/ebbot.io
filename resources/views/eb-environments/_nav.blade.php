@@ -24,7 +24,13 @@
     <li role="presentation" @if(Request::is('eb-environments/*/deployments')) class="active" @endif>
         <a href="/eb-environments/{{ $eb_environment->id }}/deployments">
             <i class="fa fa-rocket"></i>&nbsp;
-            Deployments
+            Deployment Logs
+        </a>
+    </li>
+    <li role="presentation" @if(Request::is('eb-environments/*/status')) class="active" @endif>
+        <a href="/eb-environments/{{ $eb_environment->id }}/status">
+            <i class="fa fa-circle"></i>&nbsp;
+            Status Logs
         </a>
     </li>
     <li role="presentation" @if(Request::is('eb-environments/*/settings')) class="active pull-right" @else class="pull-right" @endif>
