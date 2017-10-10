@@ -29484,7 +29484,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 var moment = __webpack_require__(0);
@@ -29781,8 +29780,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BeanbotDashboardTV_vue__ = __webpack_require__(411);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__BeanbotDashboardTV_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__BeanbotDashboardTV_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__EnvironmentAdd_vue__ = __webpack_require__(303);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__EnvironmentAdd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__EnvironmentAdd_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__DeploymentProgress_vue__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__DeploymentProgress_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__DeploymentProgress_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__EnvironmentAdd_vue__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__EnvironmentAdd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__EnvironmentAdd_vue__);
 
 /*
  |--------------------------------------------------------------------------
@@ -29800,9 +29801,11 @@ __webpack_require__(167);
 
 
 
+
 Vue.component('beanbot-dashboard', __WEBPACK_IMPORTED_MODULE_0__BeanbotDashboard_vue___default.a);
 Vue.component('beanbot-dashboard-tv', __WEBPACK_IMPORTED_MODULE_1__BeanbotDashboardTV_vue___default.a);
-Vue.component('environment-add', __WEBPACK_IMPORTED_MODULE_2__EnvironmentAdd_vue___default.a);
+Vue.component('deployment-progress', __WEBPACK_IMPORTED_MODULE_2__DeploymentProgress_vue___default.a);
+Vue.component('environment-add', __WEBPACK_IMPORTED_MODULE_3__EnvironmentAdd_vue___default.a);
 
 /***/ }),
 /* 165 */
@@ -67034,7 +67037,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "colspan": "2"
       }
-    }, [_vm._v(_vm._s(application))]), _vm._v(" "), _c('th', [_vm._v("Status")]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('th', [_vm._v("Deploy")]), _vm._v(" "), _c('th')]), _vm._v(" "), _vm._l((environments), function(environment) {
+    }, [_vm._v(_vm._s(application))]), _vm._v(" "), _c('th', [_vm._v("Status")]), _vm._v(" "), _c('th', [_vm._v("Deploy")]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('th')]), _vm._v(" "), _vm._l((environments), function(environment) {
       return _c('tr', {
         class: {
           'danger': environment.status.status === 'Severe' || environment.status.status === 'Degraded',
@@ -67056,14 +67059,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             'status-warning': environment.status.status === 'Warning',
             'status-unknown': environment.status.status === 'Unknown',
             'status-degraded': environment.status.status === 'Degraded',
-            'status-severe': environment.status.status === 'Severe'
+            'status-severe': environment.status.status === 'Severe',
+            'fa-circle': environment.last_deployment === null || environment.last_deployment.deployment_completed_at !== null,
+            'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null
         }
       })]), _vm._v(" "), _c('td', [_c('a', {
         attrs: {
           "href": "https://console.aws.amazon.com/elasticbeanstalk/home",
           "target": "_blank"
         }
-      }, [_vm._v(_vm._s(environment.eb_environment))])]), _vm._v(" "), _c('td', [(environment.status !== null) ? _c('span', [_c('strong', {
+      }, [_vm._v(_vm._s(environment.eb_environment))])]), _vm._v(" "), _c('td', {
+        attrs: {
+          "width": "160"
+        }
+      }, [(environment.status !== null) ? _c('span', [_c('strong', {
         staticStyle: {
           "font-family": "monospace",
           "text-transform": "uppercase"
@@ -67073,23 +67082,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "since": _vm.moment.utc(environment.status.status_set_at),
           "auto-update": 1
         }
-      })], 1)]) : _c('span', [_vm._m(3, true)])]), _vm._v(" "), _c('td', [_c('a', {
+      })], 1)]) : _c('span', [_vm._m(3, true)])]), _vm._v(" "), _c('td', {
+        attrs: {
+          "width": "300"
+        }
+      }, [(environment.last_deployment !== null) ? _c('span', [(environment.last_deployment.deployment_completed_at === null) ? _c('span', [_c('deployment-progress', {
+        attrs: {
+          "startedAt": environment.last_deployment.created_at,
+          "durationProjected": environment.last_deployment.duration_projected
+        }
+      })], 1) : _c('span', [_vm._v("\n                                " + _vm._s(_vm.moment.utc(environment.last_deployment.deployment_completed_at).format('ddd, MMM Do YYYY, h:mm A')) + " UTC"), _c('br'), _vm._v(" "), _c('small', [_c('timeago', {
+        attrs: {
+          "since": _vm.moment.utc(environment.last_deployment.created_at),
+          "auto-update": 60
+        }
+      }), _vm._v(",\n                                    Duration: " + _vm._s(_vm.moment(environment.last_deployment.created_at).to(environment.last_deployment.deployment_completed_at, true)) + "\n                                ")], 1)])]) : _c('span', [_vm._m(4, true)])]), _vm._v(" "), _c('td', [_c('a', {
         attrs: {
           "href": '/eb-environments/' + environment.id + '/settings'
         }
-      }, [_vm._v("\n                            " + _vm._s(environment.notification_count) + "\n                        ")])]), _vm._v(" "), _c('td', [(environment.last_deployment !== null) ? _c('span', [(environment.last_deployment.deployment_completed_at == null) ? _c('span', [_c('i', {
-        staticClass: "fa fa-refresh fa-spin"
-      }), _vm._v("\n                                Deploying..."), _c('br'), _vm._v(" "), _c('small', [_vm._v("\n                                    Started: "), _c('timeago', {
-        attrs: {
-          "since": _vm.moment.utc(environment.last_deployment.created_at),
-          "auto-update": 1
-        }
-      })], 1)]) : _c('span', [_vm._v("\n                                " + _vm._s(_vm.moment.utc(environment.last_deployment.deployment_completed_at).format('ddd, MMM Do YYYY, h:mm A')) + " UTC"), _c('br'), _vm._v(" "), _c('small', [_c('timeago', {
-        attrs: {
-          "since": _vm.moment.utc(environment.last_deployment.created_at),
-          "auto-update": 1
-        }
-      }), _vm._v(",\n                                    Duration: " + _vm._s(_vm.moment(environment.last_deployment.created_at).to(environment.last_deployment.deployment_completed_at, true)) + "\n                                ")], 1)])]) : _c('span', [_vm._m(4, true)])]), _vm._v(" "), _c('td', {
+      }, [_vm._v("\n                            " + _vm._s(environment.notification_count) + "\n                        ")])]), _vm._v(" "), _c('td', {
         attrs: {
           "width": "1"
         }
@@ -78058,6 +78069,125 @@ return install;
 /***/ (function(module, exports) {
 
 module.exports = ["just now",["%s second ago","%s seconds ago"],["%s minute ago","%s minutes ago"],["%s hour ago","%s hours ago"],["%s day ago","%s days ago"],["%s week ago","%s weeks ago"],["%s month ago","%s months ago"],["%s year ago","%s years ago"]]
+
+/***/ }),
+/* 416 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var moment = __webpack_require__(0);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ["startedAt", "durationProjected"],
+
+    data: function data() {
+        return {
+            now: moment()
+        };
+    },
+    mounted: function mounted() {
+        var vm = this;
+        setInterval(function () {
+            vm.$data.now = moment();
+        }, 1000);
+    },
+
+
+    computed: {
+
+        percentage: function percentage() {
+            var vm = this;
+            var now = moment.utc(vm.now);
+            var seconds_elapsed = Math.abs(moment.utc(vm.startedAt).diff(now)) / 1000;
+            var percentage = Math.min(seconds_elapsed / vm.durationProjected * 100, 100);
+            return percentage;
+        }
+
+    }
+
+});
+
+/***/ }),
+/* 417 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(139)(
+  /* script */
+  __webpack_require__(416),
+  /* template */
+  __webpack_require__(418),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/ubuntu/workspace/ebbot.io/resources/assets/js/components/DeploymentProgress.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] DeploymentProgress.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0bbfba70", Component.options)
+  } else {
+    hotAPI.reload("data-v-0bbfba70", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 418 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "progress",
+    staticStyle: {
+      "margin": "0px"
+    }
+  }, [_c('div', {
+    staticClass: "progress-bar active",
+    class: {
+      'progress-bar-striped': _vm.percentage >= 100
+    },
+    style: ('width:' + _vm.percentage + '%'),
+    attrs: {
+      "role": "progressbar",
+      "aria-valuenow": _vm.percentage,
+      "aria-valuemin": "0",
+      "aria-valuemax": "100"
+    }
+  }, [_c('span', {
+    staticClass: "sr-only"
+  }, [_vm._v(_vm._s(_vm.percentage) + "% Complete")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-0bbfba70", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

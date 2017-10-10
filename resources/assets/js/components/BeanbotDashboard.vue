@@ -16,14 +16,15 @@
         </div>
         
         <div class="panel panel-default" v-if="applications !== null && teamHasApplications">
+            
             <table class="table table-hover table-eb">
                 <tbody v-for="(environments, application) in applications">
                     <tr>
                         <th><i class="fa fa-globe fa-2x"></i></th>
                         <th colspan=2>{{ application }}</th>
                         <th>Status</th>
-                        <th class="text-center" width="1"><i class="fa fa-bullhorn"></i></th>
                         <th>Deploy</th>
+                        <th class="text-center" width="1"><i class="fa fa-bullhorn"></i></th>
                         <th></th>
                     </tr>
                     <tr v-for="environment in environments" v-bind:class="{ 
@@ -37,13 +38,15 @@
                                 'status-warning': environment.status.status === 'Warning',
                                 'status-unknown': environment.status.status === 'Unknown',
                                 'status-degraded': environment.status.status === 'Degraded',
-                                'status-severe': environment.status.status === 'Severe'
+                                'status-severe': environment.status.status === 'Severe',
+                                'fa-circle': environment.last_deployment === null || environment.last_deployment.deployment_completed_at !== null,
+                                'fa-refresh fa-spin': environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null
                                 }"></i>
                         </td>
                         <td>
                             <a href="https://console.aws.amazon.com/elasticbeanstalk/home" target="_blank">{{ environment.eb_environment }}</a>
                         </td>
-                        <td>
+                        <td width="160">
                             <span v-if="environment.status !== null">
                                 <strong style="font-family:monospace; text-transform:uppercase;">{{ environment.status.status }}</strong><br />
                                 <small><timeago :since="moment.utc(environment.status.status_set_at)" :auto-update="1"></timeago></small>
@@ -55,24 +58,15 @@
                                 </em>
                             </span>
                         </td>
-                        <td>
-                            <a :href="'/eb-environments/'+ environment.id+'/settings'">
-                                {{ environment.notification_count }}
-                            </a>
-                        </td>
-                        <td>
+                        <td width="300">
                             <span v-if="environment.last_deployment !== null">
-                                <span v-if="environment.last_deployment.deployment_completed_at == null">
-                                    <i class="fa fa-refresh fa-spin"></i>
-                                    Deploying...<br />
-                                    <small>
-                                        Started: <timeago :since="moment.utc(environment.last_deployment.created_at)" :auto-update="1"></timeago>
-                                    </small>
+                                <span v-if="environment.last_deployment.deployment_completed_at === null">
+                                    <deployment-progress :startedAt="environment.last_deployment.created_at" :durationProjected="environment.last_deployment.duration_projected"></deployment-progress>
                                 </span>
-                                <span v-else="environment.last_deployment.deployment_completed_at == null">
+                                <span v-else="environment.last_deployment.deployment_completed_at !== null">
                                     {{ moment.utc(environment.last_deployment.deployment_completed_at).format('ddd, MMM Do YYYY, h:mm A') }} UTC<br />
                                     <small>
-                                        <timeago :since="moment.utc(environment.last_deployment.created_at)" :auto-update="1"></timeago>,
+                                        <timeago :since="moment.utc(environment.last_deployment.created_at)" :auto-update="60"></timeago>,
                                         Duration: {{ moment(environment.last_deployment.created_at).to(environment.last_deployment.deployment_completed_at, true) }}
                                     </small>
                                 </span>
@@ -83,6 +77,11 @@
                                     <small>No Deploy Detected Yet</small>
                                 </em>
                             </span>
+                        </td>
+                        <td>
+                            <a :href="'/eb-environments/'+ environment.id+'/settings'">
+                                {{ environment.notification_count }}
+                            </a>
                         </td>
                         <td width="1">
                             <a :href="'/eb-environments/'+ environment.id" class="btn btn-default">
