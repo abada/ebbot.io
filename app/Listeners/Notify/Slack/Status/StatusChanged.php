@@ -17,7 +17,7 @@ class StatusChanged
         'unkown' => 'warning',
         'warning' => 'warning',
         'degraded' => 'danger',
-        'severe' => 'severe',
+        'severe' => 'danger',
     ];
     
     /**
