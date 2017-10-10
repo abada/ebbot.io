@@ -46,7 +46,7 @@
                         <td>
                             <span v-if="environment.status !== null">
                                 <strong style="font-family:monospace; text-transform:uppercase;">{{ environment.status.status }}</strong><br />
-                                <small>{{ moment.utc().to(moment.utc(environment.status.status_set_at)) }}</small>
+                                <small><timeago :since="environment.status.status_set_at" :auto-update="1"></timeago></small>
                             </span>
                             <span v-else="environment.status !== null">
                                 <em>
@@ -64,12 +64,15 @@
                             <span v-if="environment.last_deployment !== null">
                                 <span v-if="environment.last_deployment.deployment_completed_at == null">
                                     <i class="fa fa-refresh fa-spin"></i>
-                                    Deploying...
+                                    Deploying...<br />
+                                    <small>
+                                        Started: <timeago :since="environment.last_deployment.created_at" :auto-update="1"></timeago>
+                                    </small>
                                 </span>
                                 <span v-else="environment.last_deployment.deployment_completed_at == null">
                                     {{ moment.utc(environment.last_deployment.deployment_completed_at).format('ddd, MMM Do YYYY, h:mm A') }} UTC<br />
                                     <small>
-                                        {{ moment.utc().to(moment.utc(environment.last_deployment.created_at)) }},
+                                        <timeago :since="environment.last_deployment.created_at" :auto-update="1"></timeago>,
                                         Duration: {{ moment(environment.last_deployment.created_at).to(environment.last_deployment.deployment_completed_at, true) }}
                                     </small>
                                 </span>
