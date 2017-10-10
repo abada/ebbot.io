@@ -61,7 +61,7 @@ class StatusChanged
         $currentStatusField = 'notify_status_'.strtolower($status->status);
         $notifyForCurrentStatus = $environment->$currentStatusField;
         $previousStatusField = 'notify_status_'.strtolower($previousStatus->status);
-        $notifyForPreviousStatus = $environment->$currentStatusField;
+        $notifyForPreviousStatus = $environment->$previousStatusField;
         if(!$notifyForPreviousStatus && !$notifyForCurrentStatus) {
             return;
         }
