@@ -76,7 +76,7 @@ class StatusChanged
         $statusColor = $this->statusColorMap[strtolower($status->status)];
         
         
-        $message = strtoupper($status->status).': '.$environment->eb_application.' - '.$environment->eb_environment.'. ';
+        $message = strtoupper($previousStatus->status).' -> '.strtoupper($status->status).': '.$environment->eb_environment.' ('.$environment->eb_application.') ';
         $message.= '<https://beanbot.io/home|Details>'; 
         $attachment = [
         	'fallback' => $message,
