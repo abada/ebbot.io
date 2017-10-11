@@ -15,7 +15,6 @@
                             <th>Started</th>
                             <th>Ended</th>
                             <th>Duration</th>
-                            <th>AWS Latency</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,9 +39,6 @@
                             </td>
                             <td>
                                 {{ $status->status_set_at->diffForHumans($status->status_ended_at, true) }}
-                            </td>
-                            <td>
-                                {{ $status->created_at->diffForHumans($status->status_set_at, true) }}
                             </td>
                         </tr>
                         @endforeach
