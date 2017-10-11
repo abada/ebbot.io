@@ -40,9 +40,11 @@ class StatusChange implements Trigger
         }
         
         // UPDATE THE OLD STATUS END DATE
-        $oldStatus = $env->status;
-        $oldStatus->status_ended_at = $eb_event->getEbTimestamp();
-        $oldStatus->save();
+        if(!is_null($env->status)) {
+            $oldStatus = $env->status;
+            $oldStatus->status_ended_at = $eb_event->getEbTimestamp();
+            $oldStatus->save();
+        }
         
         // CREATE NEW ENVIRONMENT STATUS
         $status = new EbEnvironmentStatus;
