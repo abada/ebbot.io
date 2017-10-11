@@ -77,7 +77,7 @@ class StatusChanged
         
         
         $message = strtoupper($status->status).': '.$environment->eb_application.' - '.$environment->eb_environment.'. ';
-        $message.= '[More Details](https://beanbot.io/home)'; 
+        $message.= '<https://beanbot.io/home|Details>'; 
         $attachment = [
         	'fallback' => $message,
         	'text' => $message,
