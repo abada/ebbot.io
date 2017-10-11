@@ -35,6 +35,10 @@ class BackfillStatusEndedAt extends Command
         
         foreach ($statuses as $status) {
             
+            if(is_null($status->eb_environment)) {
+                continue;
+            }
+            
             $nextStatus = $status->eb_environment->statuses()
                 ->where('status_set_at', '>', $status->status_set_at)
                 ->orderBy('status_set_at')
