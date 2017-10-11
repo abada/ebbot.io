@@ -12,8 +12,8 @@
                         <tr>
                             <th width="1"></th>
                             <th width="50">Status</th>
-                            <th>Entered Status</th>
-                            <th>SNS Latency</th>
+                            <th>Started</th>
+                            <th>Ended</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +30,12 @@
                                 <small>({{ $status->status_set_at->diffForHumans() }})</small>
                             </td>
                             <td style="vertical-align:middle;">
-                                {{ $status->status_set_at->diffForHumans($status->created_at, true) }}
+                                @if(!is_null($status->status_ended_at))
+                                    {{ $status->status_ended_at }}&nbsp;&nbsp;
+                                @else
+                                    <em>Ongoing...</em>
+                                @endif
+                                <small>{{ $status->status_set_at->diffForHumans($status->status_ended_at) }}</small>
                             </td>
                         </tr>
                         @endforeach

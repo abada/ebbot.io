@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EbEnvironmentStatus extends Model
 {
     
-    public $dates = ['status_set_at'];
+    public $dates = ['status_set_at', 'status_ended_at'];
     
     public function eb_environment() 
     {
