@@ -14,6 +14,7 @@
                             <th width="50">Status</th>
                             <th>Started</th>
                             <th>Ended</th>
+                            <th>Duration</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +36,9 @@
                                 @else
                                     <em>Ongoing...</em>
                                 @endif
-                                <small>{{ $status->status_set_at->diffForHumans($status->status_ended_at, true) }}</small>
+                            </td>
+                            <td>
+                                {{ $status->status_set_at->diffForHumans($status->status_ended_at, true) }}
                             </td>
                         </tr>
                         @endforeach
