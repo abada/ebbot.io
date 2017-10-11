@@ -35,7 +35,7 @@
                                 @else
                                     <em>Ongoing...</em>
                                 @endif
-                                <small>{{ $status->status_set_at->diffForHumans($status->status_ended_at) }}</small>
+                                <small>{{ $status->status_set_at->diffForHumans($status->status_ended_at, true) }}</small>
                             </td>
                         </tr>
                         @endforeach
