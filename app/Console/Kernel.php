@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // BACKFILL
         Commands\BackfillDeploymentDuration::class,
+        Commands\BackfillStatusEndedAt::class,
         
         // METRICS
         Commands\MetricsDay::class,
