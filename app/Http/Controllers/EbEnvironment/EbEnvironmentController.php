@@ -4,9 +4,21 @@ namespace App\Http\Controllers\EbEnvironment;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\DeploymentRepository;
+use App\Repositories\EbEnvironmentStatusRepository;
+use Lava;
 
 class EbEnvironmentController extends Controller
 {
+    
+    protected $deploymentRepo;
+    protected $ebEnvironmentStatusRepo;
+ 
+    public function __construct(DeploymentRepository $deploymentRepo, EbEnvironmentStatusRepository $ebEnvironmentStatusRepo)
+    {
+        $this->deploymentRepo = $deploymentRepo;
+        $this->ebEnvironmentStatusRepo = $ebEnvironmentStatusRepo;
+    }
  
     public function index() 
     {
@@ -17,6 +29,26 @@ class EbEnvironmentController extends Controller
     {
         $eb_environment = $request->user()
             ->currentTeam()->ebenvironments()->find($eb_environment_id);
+
+        // PREPARE CHARTS            
+        $deploymentsDataTable = $this->deploymentRepo->getNumberOfDeploymentsOverLastDaysDataTable($eb_environment);
+        Lava::ColumnChart('chart_deployment_days', $deploymentsDataTable, [
+            'isStacked' => true, 
+            'legend' => 'top', 
+            'colors' => ['#6EAF5D', '#FFBD4A'],
+            'height' => 200,
+            'chartArea' => ['width' => '90%', 'height' => '80%'],
+        ]);
+        
+        // PREPARE CHARTS            
+        $statusDataTable = $this->ebEnvironmentStatusRepo->getStatusChangesForEnvironmentOverDaysDataTable($eb_environment);
+        Lava::ColumnChart('chart_status_days', $statusDataTable, [
+            'isStacked' => true, 
+            'legend' => 'top', 
+            'colors' => ['#6EAF5D', '#2A99CE', '#FFBD4A', '#F05050', '#990000', '#CCCCCC'],
+            'height' => 200,
+            'chartArea' => ['width' => '90%', 'height' => '80%'],
+        ]);
         
         return view('eb-environments.show', ['eb_environment' => $eb_environment]);
     }
