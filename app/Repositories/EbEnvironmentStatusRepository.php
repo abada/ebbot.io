@@ -41,12 +41,12 @@ class EbEnvironmentStatusRepository
         return DB::select("
             SELECT 
             	date(days.date) as date,
-            	SUM(CASE WHEN status='Ok' THEN 1 ELSE 0 END) as ok,
-            	SUM(CASE WHEN status='Info' THEN 1 ELSE 0 END) as info,
-            	SUM(CASE WHEN status='Warning' THEN 1 ELSE 0 END) as warning,
-            	SUM(CASE WHEN status='Degraded' THEN 1 ELSE 0 END) as degraded,
-            	SUM(CASE WHEN status='Severe' THEN 1 ELSE 0 END) as severe,
-            	SUM(CASE WHEN status='Unknown' THEN 1 ELSE 0 END) as unknown
+            	SUM(CASE WHEN status='Ok' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as ok,
+            	SUM(CASE WHEN status='Info' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as info,
+            	SUM(CASE WHEN status='Warning' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as warning,
+            	SUM(CASE WHEN status='Degraded' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as degraded,
+            	SUM(CASE WHEN status='Severe' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as severe,
+            	SUM(CASE WHEN status='Unknown' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as unknown
             FROM 
             	days
             	LEFT JOIN eb_environment_statuses ON date(status_set_at) = days.date AND eb_environment_id = ?
