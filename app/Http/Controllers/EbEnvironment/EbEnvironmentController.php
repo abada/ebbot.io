@@ -29,28 +29,30 @@ class EbEnvironmentController extends Controller
     {
         $eb_environment = $request->user()
             ->currentTeam()->ebenvironments()->find($eb_environment_id);
+            
+        $days = ($request->has('days') ? intval($request->input('days')) : 14);
 
         // PREPARE CHARTS            
-        $deploymentsDataTable = $this->deploymentRepo->getNumberOfDeploymentsOverLastDaysDataTable($eb_environment);
+        $deploymentsDataTable = $this->deploymentRepo->getNumberOfDeploymentsOverLastDaysDataTable($eb_environment, $days);
         Lava::ColumnChart('chart_deployment_days', $deploymentsDataTable, [
             'isStacked' => true, 
             'legend' => 'top', 
             'colors' => ['#6EAF5D', '#FFBD4A'],
             'height' => 200,
-            'chartArea' => ['width' => '90%', 'height' => '80%'],
+            'chartArea' => ['width' => '90%', 'height' => '70%'],
         ]);
         
         // PREPARE CHARTS            
-        $statusDataTable = $this->ebEnvironmentStatusRepo->getStatusChangesForEnvironmentOverDaysDataTable($eb_environment);
+        $statusDataTable = $this->ebEnvironmentStatusRepo->getStatusChangesForEnvironmentOverDaysDataTable($eb_environment, $days);
         Lava::ColumnChart('chart_status_days', $statusDataTable, [
             'isStacked' => true, 
             'legend' => 'top', 
             'colors' => ['#6EAF5D', '#2A99CE', '#FFBD4A', '#F05050', '#990000', '#CCCCCC'],
             'height' => 200,
-            'chartArea' => ['width' => '90%', 'height' => '80%'],
+            'chartArea' => ['width' => '90%', 'height' => '70%'],
         ]);
         
-        return view('eb-environments.show', ['eb_environment' => $eb_environment]);
+        return view('eb-environments.show', ['eb_environment' => $eb_environment, 'days' => $days]);
     }
     
     public function edit(Request $request, $eb_environment_id)
