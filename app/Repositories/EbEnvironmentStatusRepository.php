@@ -41,12 +41,12 @@ class EbEnvironmentStatusRepository
         return DB::select("
             SELECT 
             	date(days.date) as date,
-            	SUM(CASE WHEN status='Ok' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as ok,
-            	SUM(CASE WHEN status='Info' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as info,
-            	SUM(CASE WHEN status='Warning' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as warning,
-            	SUM(CASE WHEN status='Degraded' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as degraded,
-            	SUM(CASE WHEN status='Severe' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as severe,
-            	SUM(CASE WHEN status='Unknown' THEN TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as unknown
+            	SUM(CASE WHEN status='Ok' THEN TIMESTAMPDIFF(SECOND, status_set_at, (CASE WHEN status_ended_at IS NULL THEN NOW() ELSE status_ended_at END)) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as ok,
+            	SUM(CASE WHEN status='Info' THEN TIMESTAMPDIFF(SECOND, status_set_at, (CASE WHEN status_ended_at IS NULL THEN NOW() ELSE status_ended_at END)) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as info,
+            	SUM(CASE WHEN status='Warning' THEN TIMESTAMPDIFF(SECOND, status_set_at, (CASE WHEN status_ended_at IS NULL THEN NOW() ELSE status_ended_at END)) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as warning,
+            	SUM(CASE WHEN status='Degraded' THEN TIMESTAMPDIFF(SECOND, status_set_at, (CASE WHEN status_ended_at IS NULL THEN NOW() ELSE status_ended_at END)) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as degraded,
+            	SUM(CASE WHEN status='Severe' THEN TIMESTAMPDIFF(SECOND, status_set_at, (CASE WHEN status_ended_at IS NULL THEN NOW() ELSE status_ended_at END)) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as severe,
+            	SUM(CASE WHEN status='Unknown' THEN TIMESTAMPDIFF(SECOND, status_set_at, (CASE WHEN status_ended_at IS NULL THEN NOW() ELSE status_ended_at END)) ELSE 0 END) / SUM(TIMESTAMPDIFF(SECOND, status_set_at, status_ended_at)) as unknown
             FROM 
             	days
             	LEFT JOIN eb_environment_statuses ON date(status_set_at) = days.date AND eb_environment_id = ?
