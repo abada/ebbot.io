@@ -21,8 +21,14 @@
                             </div>
                             <div class="media-body">
                                 
-                                <strong>{{ environment.eb_application }}</strong><br />
-                                <small>{{ environment.eb_environment }}</small>
+                                <p>
+                                    <strong>{{ environment.eb_application }}</strong><br />
+                                    <small>{{ environment.eb_environment }}</small>
+                                </p>
+                                
+                                <div v-if="environment.last_deployment !== null && environment.last_deployment.deployment_completed_at === null">
+                                    <deployment-progress :startedAt="environment.last_deployment.created_at" :durationProjected="environment.last_deployment.duration_projected"></deployment-progress>
+                                </div>
                                 
                             </div>
                         </div>
