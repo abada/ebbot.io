@@ -30,6 +30,10 @@
                                     <deployment-progress :startedAt="environment.last_deployment.created_at" :durationProjected="environment.last_deployment.duration_projected"></deployment-progress>
                                 </div>
                                 
+                                <div v-if="environment.last_deployment !== null && environment.last_deployment.deployment_completed_at !== null">
+                                    Last Deploy: <strong><timeago :since="moment.utc(environment.last_deployment.created_at)" :auto-update="60"></timeago></strong>
+                                </div>
+                                
                             </div>
                         </div>
                     
