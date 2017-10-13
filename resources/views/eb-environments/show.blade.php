@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         @include('eb-environments._nav')
         
         <div class="panel panel-default panel-tabnav">
