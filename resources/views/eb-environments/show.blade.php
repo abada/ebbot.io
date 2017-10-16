@@ -25,10 +25,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         
-                        <h3>Status Changes <small>over the last {{ $days }} days</small></h3>
+                        <h3>Status Percentages <small>over the last {{ $days }} days</small></h3>
                         <br />
                         <div id="chart_status_days"></div>
                         <?= Lava::render('ColumnChart', 'chart_status_days', 'chart_status_days') ?>
+                        <br />
                         
                     </div>
                     <div class="col-md-6">
@@ -37,6 +38,7 @@
                         <br />
                         <div id="chart_deployments_days"></div>
                         <?= Lava::render('ColumnChart', 'chart_deployment_days', 'chart_deployments_days') ?>
+                        <br />
                         
                     </div>
                 </div>

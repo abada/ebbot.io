@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         // BACKFILL
         Commands\BackfillDeploymentDuration::class,
         Commands\BackfillStatusEndedAt::class,
+        Commands\BackfillEventEbCreatedAt::class,
         
         // METRICS
         Commands\MetricsDay::class,

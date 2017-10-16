@@ -42,6 +42,7 @@ class EbEnvironmentController extends Controller
             'chartArea' => ['width' => '90%', 'height' => '70%'],
         ]);
         
+        
         // PREPARE CHARTS            
         $statusDataTable = $this->ebEnvironmentStatusRepo->getStatusChangesForEnvironmentOverDaysDataTable($eb_environment, $days);
         Lava::ColumnChart('chart_status_days', $statusDataTable, [

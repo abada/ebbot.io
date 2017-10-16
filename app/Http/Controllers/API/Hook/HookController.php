@@ -45,6 +45,7 @@ class HookController extends Controller
                 $team->save();
             }
         }
+       
         
         // STORE & PROCESS THE EVENT
         $eb_event = new Event;
@@ -52,6 +53,7 @@ class HookController extends Controller
         $eb_event->sns_message_id = $request->json('MessageId');
         $eb_event->sns_type = $request->header('x-amz-sns-message-type');
         $eb_event->payload = json_encode($request->json()->all());
+        $eb_event->eb_created_at = $eb_event->getEbSNSTimestamp();
         $eb_event->save();
         
         event(new NewEvent($eb_event));

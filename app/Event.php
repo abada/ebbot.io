@@ -10,6 +10,8 @@ class Event extends Model
     
     protected $eb = null;
     
+    protected $dates = ['eb_created_at'];
+    
     public function team() 
     {
         return $this->belongsTo('App\Team');    
@@ -18,6 +20,14 @@ class Event extends Model
     public function isEbNotification() {
         $subject = (json_decode($this->payload))->Subject;
         return $this->sns_type == 'Notification' && strpos($subject, 'AWS Elastic Beanstalk Notification') >= 0;
+    }
+    
+    public function getEbSNSTimestamp() {
+        $payload = json_decode($this->payload);
+        if(property_exists($payload, 'Timestamp')) {
+            return new Carbon($payload->Timestamp);
+        }
+        return $this->created_at;
     }
     
     public function getEbTimestamp() 
