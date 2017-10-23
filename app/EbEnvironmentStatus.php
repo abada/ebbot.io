@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class EbEnvironmentStatus extends Model
 {
-    
-    public $dates = ['status_set_at', 'status_ended_at'];
+    public $dates = ['status_started_at', 'status_ended_at'];
     
     public function eb_environment() 
     {

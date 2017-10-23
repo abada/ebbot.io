@@ -14,7 +14,7 @@ class StatusController extends Controller
             ->currentTeam()->ebenvironments()->find($eb_environment_id);
             
         $statuses = $eb_environment->statuses()
-            ->orderBy('id', 'DESC')->paginate(50);
+            ->orderBy('status_started_at', 'DESC')->paginate(50);
         
         return view('eb-environments.status.index', [
             'eb_environment' => $eb_environment, 'statuses' => $statuses]);

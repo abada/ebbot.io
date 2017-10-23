@@ -3,7 +3,7 @@
 namespace App\Libraries\SNSParser\Triggers\Status;
 
 use App\Event;
-use App\Events\EbEnvironmentStatusChanged;
+use App\Events\EbEnvironmentStatusChangeReported;
 use App\EbEnvironmentStatus;
 use App\Libraries\SNSParser\Trigger;
 use App\Repositories\TeamRepository;
@@ -49,11 +49,11 @@ class StatusChange implements Trigger
         // CREATE NEW ENVIRONMENT STATUS
         $status = new EbEnvironmentStatus;
         $status->status = $to;
-        $status->status_set_at = $eb_event->getEbTimestamp();
+        $status->status_started_at = $eb_event->getEbTimestamp();
         $env->statuses()->save($status);
         
         // FIRE NEW ENVIRONMENT STATUS EVENT
-        event(new EbEnvironmentStatusChanged($status));
+        event(new EbEnvironmentStatusChangeReported($status));
     }
     
 }

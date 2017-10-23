@@ -27,8 +27,8 @@
                                 <strong>{{ $status->status }}</strong>
                             </td>
                             <td style="vertical-align:middle;">
-                                {{ $status->status_set_at }}&nbsp;&nbsp;
-                                <small>({{ $status->status_set_at->diffForHumans() }})</small>
+                                {{ $status->status_started_at }}&nbsp;&nbsp;
+                                <small>({{ $status->status_started_at->diffForHumans() }})</small>
                             </td>
                             <td style="vertical-align:middle;">
                                 @if(!is_null($status->status_ended_at))
@@ -38,7 +38,7 @@
                                 @endif
                             </td>
                             <td>
-                                {{ $status->status_set_at->diffForHumans($status->status_ended_at, true) }}
+                                {{ $status->status_started_at->diffForHumans($status->status_ended_at, true) }}
                             </td>
                         </tr>
                         @endforeach

@@ -69,7 +69,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SetTeamEBNotificationReceived'
         ],
         
-        'App\Events\EbEnvironmentStatusChanged' => [
+        'App\Events\EbEnvironmentStatusChangeReported' => [
             'App\Listeners\Notify\Slack\Status\StatusChanged',
         ],
         

@@ -48,8 +48,8 @@ class StatusChanged
         
         // FETCH THE PREVIOUS STATUS
         $previousStatus = $environment->statuses()
-            ->where('status_set_at', '<', $status->status_set_at)
-            ->orderBy('status_set_at', 'DESC')
+            ->where('status_started_at', '<', $status->status_started_at)
+            ->orderBy('status_started_at', 'DESC')
             ->first();
             
         // SKIP IF THERE IS NO PREVIOUS STATUS

@@ -49,7 +49,7 @@
                         <td width="160">
                             <span v-if="environment.status !== null">
                                 <strong style="font-family:monospace; text-transform:uppercase;">{{ environment.status.status }}</strong><br />
-                                <small><timeago :since="moment.utc(environment.status.status_set_at)" :auto-update="1"></timeago></small>
+                                <small><timeago :since="moment.utc(environment.status.status_started_at)" :auto-update="1"></timeago></small>
                             </span>
                             <span v-else="environment.status !== null">
                                 <em>

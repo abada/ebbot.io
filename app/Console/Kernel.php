@@ -20,6 +20,9 @@ class Kernel extends ConsoleKernel
         
         // METRICS
         Commands\MetricsDay::class,
+        
+        // MAINTENANCE
+        Commands\StatusNewDay::class,
     ];
 
     /**
