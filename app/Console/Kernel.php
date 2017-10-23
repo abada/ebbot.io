@@ -42,6 +42,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('metrics:day')->daily()
             ->pingBefore("https://envbeat.com/ping/lHud6gQtS77KH2m3zFup?env={$env}")
             ->thenPing("https://envbeat.com/ping/lHud6gQtS77KH2m3zFup?env={$env}&ended");
+            
+        $schedule->command('status:newDay')->daily()
+            ->pingBefore("https://envbeat.com/ping/Fy56rkTIgQxx5Gu34R7g?env={$env}")
+            ->thenPing("https://envbeat.com/ping/Fy56rkTIgQxx5Gu34R7g?env={$env}&ended");
     }
 
     /**
