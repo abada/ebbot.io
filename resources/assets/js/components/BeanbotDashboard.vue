@@ -125,7 +125,7 @@
                 var vm = this;
                 
                 window.Echo.private('team.'+vm.currentTeam.id)
-                    .listen('EbEnvironmentStatusChanged', event => {
+                    .listen('EbEnvironmentStatusChangeReported', event => {
                         vm.fetchData();
                     });
                     
