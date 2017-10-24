@@ -37,7 +37,7 @@ class EbEnvironmentController extends Controller
         Lava::ColumnChart('chart_deployment_days', $deploymentsDataTable, [
             'isStacked' => true, 
             'legend' => 'top', 
-            'colors' => ['#6EAF5D', '#A4AAAD'],
+            'colors' => ['#A4AAAD'],
             'height' => 200,
             'chartArea' => ['width' => '90%', 'height' => '70%'],
         ]);

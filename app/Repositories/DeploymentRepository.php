@@ -54,11 +54,10 @@ class DeploymentRepository
         // DEFINE TABLE STRUCTURE
         $dataTable = Lava::DataTable();
         $dataTable->addDateColumn('Date');
-        $dataTable->addNumberColumn('Healthy Deploys');
-        $dataTable->addNumberColumn('Unhealthy Deploys');
+        $dataTable->addNumberColumn('Deploys');
         
         foreach($rawData as $row) {
-            $dataTable->addRow([$row->date, $row->healthy, $row->unhealthy]);
+            $dataTable->addRow([$row->date, $row->deploys]);
         }
         
         return $dataTable;
@@ -73,8 +72,7 @@ class DeploymentRepository
         return DB::select("
             SELECT 
             	days.date,
-            	SUM(CASE WHEN eb_environment_deployments.deployment_completed_at IS NOT NULL AND eb_environment_deployments.deployment_healthy_at IS NOT NULL THEN 1 ELSE 0 END) as 'healthy',
-            	SUM(CASE WHEN eb_environment_deployments.deployment_completed_at IS NOT NULL AND eb_environment_deployments.deployment_healthy_at IS NULL THEN 1 ELSE 0 END) as 'unhealthy'
+            	COUNT(*) as 'deploys'
             FROM 
             	days
             	LEFT JOIN eb_environment_deployments ON date(eb_environment_deployments.created_at) = days.date AND eb_environment_id = ?
