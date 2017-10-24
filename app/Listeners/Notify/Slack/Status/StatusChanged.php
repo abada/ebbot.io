@@ -3,7 +3,7 @@
 namespace App\Listeners\Notify\Slack\Status;
 
 use App\BbNotifcation;
-use App\Events\EbEnvironmentStatusChanged;
+use App\Events\EbEnvironmentStatusChangeReported;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maknz\Slack\Client as SlackClient;
@@ -36,7 +36,7 @@ class StatusChanged
      * @param  EbEnvironmentStatusChanged  $event
      * @return void
      */
-    public function handle(EbEnvironmentStatusChanged $event)
+    public function handle(EbEnvironmentStatusChangeReported $event)
     {
         $environment = $event->environment;
         $status = $event->status;
