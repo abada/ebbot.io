@@ -70,7 +70,7 @@ class StatusChanged
         $slack = new SlackClient($environment->notification_slack_hook, [
             'username' => 'BeanBot',
             'channel' => $environment->notification_slack_channel,
-            'icon' => ':robot_face:',
+            'icon' => 'https://beanbot.io/img/beanbot.png',
         ]);
         
         $statusColor = $this->statusColorMap[strtolower($status->status)];

@@ -45,7 +45,7 @@ class DeploymentHealthy
         $slack = new SlackClient($environment->notification_slack_hook, [
             'username' => 'BeanBot',
             'channel' => $environment->notification_slack_channel,
-            'icon' => ':robot_face:',
+            'icon' => 'https://beanbot.io/img/beanbot.png',
         ]);
         
         $duration_str = $deploy->created_at->diffForHumans($deploy->deployment_completed_at, true);
