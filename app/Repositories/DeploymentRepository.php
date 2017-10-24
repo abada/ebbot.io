@@ -72,7 +72,7 @@ class DeploymentRepository
         return DB::select("
             SELECT 
             	days.date,
-            	COUNT(DISTINCT('id')) as 'deploys'
+            	SUM(CASE WHEN eb_environment_deployments.deployment_completed_at IS NOT NULL THEN 1 ELSE 0 END) as 'deploys'
             FROM 
             	days
             	LEFT JOIN eb_environment_deployments ON date(eb_environment_deployments.created_at) = days.date AND eb_environment_id = ?
