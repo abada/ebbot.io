@@ -66,7 +66,7 @@ class DeploymentRepository
     public function getNumberOfDeploymentsOverLastDaysChartData(EbEnvironment $env, $days = 30) {
         
         if(!is_integer($days)) {
-            throw new \Exception('DeploymentRepository@getDeploymentsOverLastDaysChartData Parameter 1 [days] must be an integer');
+            throw new \Exception('DeploymentRepository@getNumberOfDeploymentsOverLastDaysChartData Parameter 1 [days] must be an integer');
         }
         
         return DB::select("
@@ -106,7 +106,7 @@ class DeploymentRepository
     public function getDeploymentDurationOverLastDaysChartData(EbEnvironment $env, $days = 30) {
         
         if(!is_integer($days)) {
-            throw new \Exception('DeploymentRepository@getDeploymentsOverLastDaysChartData Parameter 1 [days] must be an integer');
+            throw new \Exception('DeploymentRepository@getDeploymentDurationOverLastDaysChartData Parameter 1 [days] must be an integer');
         }
         
         return DB::select("

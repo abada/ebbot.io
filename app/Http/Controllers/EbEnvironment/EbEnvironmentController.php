@@ -50,8 +50,12 @@ class EbEnvironmentController extends Controller
             'colors' => ['#6CAF63', '#7E8F90'],
             'height' => 400,
             'chartArea' => ['width' => '90%', 'height' => '70%'],
+            'vAxis' => [
+                'title' => 'Duration (in Minutes)',
+                'viewWindowMode' => 'explicit',
+                'viewWindow' => ['min' => 0.0],
+            ]
         ]);
-        
         
         // PREPARE CHARTS            
         $statusDataTable = $this->ebEnvironmentStatusRepo->getStatusChangesForEnvironmentOverDaysDataTable($eb_environment, $days);
