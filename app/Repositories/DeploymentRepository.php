@@ -118,6 +118,7 @@ class DeploymentRepository
             	eb_environment_deployments
             WHERE 1=1
                 AND eb_environment_id = ?
+                AND duration IS NOT NULL
                 AND eb_environment_deployments.created_at >= DATE_SUB(NOW(), INTERVAL {$days} DAY)
 
         ", [$env->id]);
