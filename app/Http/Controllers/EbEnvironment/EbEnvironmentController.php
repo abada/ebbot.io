@@ -40,6 +40,9 @@ class EbEnvironmentController extends Controller
             'colors' => ['#239BCB'],
             'height' => 400,
             'chartArea' => ['width' => '90%', 'height' => '70%'],
+            'vAxis' => [
+                'title' => 'Number of Deployments',
+            ],
         ]);
         
         // PREPARE CHARTS            
@@ -65,6 +68,9 @@ class EbEnvironmentController extends Controller
             'colors' => ['#6EAF5D', '#2A99CE', '#FFBD4A', '#F05050', '#990000', '#CCCCCC'],
             'height' => 400,
             'chartArea' => ['width' => '90%', 'height' => '70%'],
+            'vAxis' => [
+                'title' => '% of day in status',
+            ],
         ]);
         
         // PREPARE CHARTS            
@@ -75,6 +81,9 @@ class EbEnvironmentController extends Controller
             'colors' => ['#2A99CE', '#FFBD4A', '#F05050', '#990000', '#CCCCCC'],
             'height' => 400,
             'chartArea' => ['width' => '90%', 'height' => '70%'],
+            'vAxis' => [
+                'title' => '% of day in status',
+            ],
         ]);
         
         return view('eb-environments.show', ['eb_environment' => $eb_environment, 'days' => $days]);

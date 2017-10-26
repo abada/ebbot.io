@@ -54,7 +54,7 @@ class DeploymentRepository
         // DEFINE TABLE STRUCTURE
         $dataTable = Lava::DataTable();
         $dataTable->addDateColumn('Date');
-        $dataTable->addNumberColumn('Deploys');
+        $dataTable->addNumberColumn('Deployments');
         
         foreach($rawData as $row) {
             $dataTable->addRow([$row->date, $row->deploys]);
@@ -89,8 +89,8 @@ class DeploymentRepository
         // DEFINE TABLE STRUCTURE
         $dataTable = Lava::DataTable();
         $dataTable->addStringColumn('Deployment ID');
-        $dataTable->addNumberColumn('Actual (in Minutes)');
-        $dataTable->addNumberColumn('Projected (in Minutes)');
+        $dataTable->addNumberColumn('Actual');
+        $dataTable->addNumberColumn('Projected');
         
         foreach($rawData as $row) {
             $dataTable->addRow([
