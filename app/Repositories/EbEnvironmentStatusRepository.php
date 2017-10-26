@@ -32,6 +32,26 @@ class EbEnvironmentStatusRepository
         return $dataTable;
     }
     
+    public function getStatusChangesWithoutOkForEnvironmentOverDaysDataTable(EbEnvironment $env, $days = 30) {
+    
+        $rawData = $this->getStatusChangesForEnvironmentOverDaysData($env, $days);
+        
+        // DEFINE TABLE STRUCTURE
+        $dataTable = Lava::DataTable();
+        $dataTable->addDateColumn('Date');
+        $dataTable->addNumberColumn('Info');
+        $dataTable->addNumberColumn('Warning');
+        $dataTable->addNumberColumn('Degraded');
+        $dataTable->addNumberColumn('Severe');
+        $dataTable->addNumberColumn('Unknown');
+        
+        foreach($rawData as $row) {
+            $dataTable->addRow([$row->date, $row->info, $row->warning, $row->degraded, $row->severe, $row->unknown]);
+        }
+        
+        return $dataTable;
+    }
+    
     public function getStatusChangesForEnvironmentOverDaysData(EbEnvironment $env, $days = 30) {
         
         if(!is_integer($days)) {

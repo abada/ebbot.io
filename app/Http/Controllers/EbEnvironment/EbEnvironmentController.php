@@ -38,7 +38,17 @@ class EbEnvironmentController extends Controller
             'isStacked' => true, 
             'legend' => 'top', 
             'colors' => ['#239BCB'],
-            'height' => 200,
+            'height' => 400,
+            'chartArea' => ['width' => '90%', 'height' => '70%'],
+        ]);
+        
+        // PREPARE CHARTS            
+        $deploymentsDurationDataTable = $this->deploymentRepo->getDeploymentDurationOverLastDaysDataTable($eb_environment, $days);
+        Lava::AreaChart('chart_deployment_duration', $deploymentsDurationDataTable, [
+            'isStacked' => false, 
+            'legend' => 'top', 
+            'colors' => ['#6CAF63', '#7E8F90'],
+            'height' => 400,
             'chartArea' => ['width' => '90%', 'height' => '70%'],
         ]);
         
@@ -49,7 +59,17 @@ class EbEnvironmentController extends Controller
             'isStacked' => true, 
             'legend' => 'top', 
             'colors' => ['#6EAF5D', '#2A99CE', '#FFBD4A', '#F05050', '#990000', '#CCCCCC'],
-            'height' => 200,
+            'height' => 400,
+            'chartArea' => ['width' => '90%', 'height' => '70%'],
+        ]);
+        
+        // PREPARE CHARTS            
+        $statusWithoutOkDataTable = $this->ebEnvironmentStatusRepo->getStatusChangesWithoutOkForEnvironmentOverDaysDataTable($eb_environment, $days);
+        Lava::ColumnChart('chart_status_without_ok_days', $statusWithoutOkDataTable, [
+            'isStacked' => true, 
+            'legend' => 'top', 
+            'colors' => ['#2A99CE', '#FFBD4A', '#F05050', '#990000', '#CCCCCC'],
+            'height' => 400,
             'chartArea' => ['width' => '90%', 'height' => '70%'],
         ]);
         

@@ -82,4 +82,45 @@ class DeploymentRepository
         ", [$env->id]);
     }
     
+    public function getDeploymentDurationOverLastDaysDataTable(EbEnvironment $env, $days = 30) {
+    
+        $rawData = $this->getDeploymentDurationOverLastDaysChartData($env, $days);
+        
+        // DEFINE TABLE STRUCTURE
+        $dataTable = Lava::DataTable();
+        $dataTable->addStringColumn('Deployment ID');
+        $dataTable->addNumberColumn('Actual (in Minutes)');
+        $dataTable->addNumberColumn('Projected (in Minutes)');
+        
+        foreach($rawData as $row) {
+            $dataTable->addRow([
+                'Deploy #'.$row->deployment_id, 
+                floatval($row->duration) / 60.0,
+                floatval($row->duration_projected) / 60.0
+            ]);
+        }
+        
+        return $dataTable;
+    }
+    
+    public function getDeploymentDurationOverLastDaysChartData(EbEnvironment $env, $days = 30) {
+        
+        if(!is_integer($days)) {
+            throw new \Exception('DeploymentRepository@getDeploymentsOverLastDaysChartData Parameter 1 [days] must be an integer');
+        }
+        
+        return DB::select("
+            SELECT 
+            	id as deployment_id,
+            	duration,
+            	duration_projected
+            FROM 
+            	eb_environment_deployments
+            WHERE 1=1
+                AND eb_environment_id = ?
+                AND eb_environment_deployments.created_at >= DATE_SUB(NOW(), INTERVAL {$days} DAY)
+
+        ", [$env->id]);
+    }
+    
 }
