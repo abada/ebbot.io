@@ -31,7 +31,7 @@
                         <?= Lava::render('ColumnChart', 'chart_status_days', 'chart_status_days') ?>
                         <br />
                         
-                        <h3>Status Percentages<small>without Ok</small></small></h3>
+                        <h3>Status Percentages <small>without Ok</small></small></h3>
                         <br />
                         <div id="chart_status_without_ok_days"></div>
                         <?= Lava::render('ColumnChart', 'chart_status_without_ok_days', 'chart_status_without_ok_days') ?>
